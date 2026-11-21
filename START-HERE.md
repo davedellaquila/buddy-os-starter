@@ -22,15 +22,41 @@ Everything lives in a GitHub repository **you own**. The buddies' pages and
 dashboard are just files in that repo, shown as web pages. Your data is
 yours, in plain text, forever readable.
 
-## Before you start, have ready
+## What you need
 
-- **A GitHub account** (free is fine). Your repository, dashboard, and
-  buddies' homepages all live there.
+### Must have before starting
+
+- **A Muse account on a paid plan.** Your own Muse runs the whole
+  system — it reads the setup guide, builds your buddies, and staffs your
+  days. Honestly stated: **this is the one real cost.** Everything else
+  below rides free tiers.
+- **A GitHub account** (free is fine). Your copy of the starter, your
+  buddies' pages, and your dashboard all live there.
 - **A Google account** (a Gmail address). The system keeps its documents
   in Google Docs and its registers and trackers in Google Sheets — that's
   where your buddies' paperwork lives.
-- **Your Muse, open in a chat.** That's it — your Muse does the rest,
-  asking you questions as it goes.
+
+### Created during setup — nothing to prepare
+
+Your Muse makes these with you, when they're needed:
+
+- **Your own copy of this starter repo** — guided to be *private*, so
+  your buddies and your life in them stay yours.
+- **Your instance config** — a small file with your name and addresses
+  that makes the generic machinery yours.
+- **A fine-grained GitHub token** for the write-back buttons — created
+  in the token step below, with the safety framing spelled out there.
+
+### Not needed — deliberately
+
+This list is here on purpose, because these are the things people assume
+they'd need and don't:
+
+- **No server.** GitHub hosts everything.
+- **No custom domain.** The free `github.io` address works fine.
+- **No coding knowledge.** Your Muse writes the code; you make the
+  decisions.
+- **No credit card beyond the Muse plan.** Free tiers carry the rest.
 
 ## What will happen
 
