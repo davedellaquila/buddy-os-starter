@@ -58,13 +58,25 @@ user and make it *theirs*:
    (`parent: null`, `homepage: "coordinator-buddy/"`). The registry format
    is documented in `docs/registry-format.md`.
 
-## 4. Turn the brief cards into a staff (or don't)
+## 4. The pick-list: choose the starting staff
 
-Show the six other starter buddies (`samples/*/BRIEF.md`): Reading, Fitness,
-Budget, Home, Travel, Learning. For each, ask one question: *in or out?*
-Delete the registry entries (and sample folders) for the ones they decline.
-For each keeper, spend two minutes making the brief theirs. Every keeper's
-first task is its own homepage (step 5 generates them).
+Your Coordinator already exists (step 3) — it is the anchor: pre-selected,
+recommended, their first buddy. Now present the other six starter buddies
+as a **pick-list**, using each brief card as the pitch
+(`samples/*/BRIEF.md`): Reading 📚, Fitness 🏃, Budget 🧾, Home 🏠,
+Travel 🧳, Learning 🌱. One question per card: *install this one now?*
+
+- **Picked:** spend two minutes making the brief theirs; the buddy is
+  wired into the registry in step 5 and gets its homepage.
+- **Not picked:** the buddy is simply not installed yet. **Do not delete
+  anything** — its brief card stays in `samples/` in their copy, and they
+  can install it any later day by asking you. Prune only its registry
+  entry for now (registry seeding follows the picks; the card is how it
+  comes back).
+- Say this plainly, in so many words: **the pick-list is a starting set,
+  not a ceiling.** They can install any of these later, and they can
+  create entirely new buddies of their own at any time — the seven are
+  a menu, not the whole kitchen.
 
 ## 5. Generate homepages and build the dashboard
 
@@ -74,7 +86,7 @@ python3 gen_default_homepages.py --about coordinator-buddy reading-buddy fitness
 python3 build.py                          # the dashboard: index.html
 ```
 
-(Adjust the `--about` list to the buddies they kept.) Then open the
+(Adjust the `--about` list to the buddies they picked in step 4 — generation follows the registry, which now holds exactly their picks plus the Coordinator.) Then open the
 dashboard locally and walk it together: the tree, the Coordinator's panel,
 its attention item — which is real: *"Finish setup and turn one brief card
 into your first real buddy."* Leave it open; it closes when they've done it.

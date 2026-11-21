@@ -16,8 +16,9 @@ This starter is the system with nobody's life in it yet. You bring the life.
    with you, wires the registry, and builds your first homepage.
 3. **Meet the staff.** Seven starter buddies ship as brief cards in
    `samples/` — a Coordinator (fully worked example) plus Reading, Fitness,
-   Budget, Home, Travel, and Learning buddies. Turn the ones you want into
-   real buddies during setup; delete the rest.
+   Budget, Home, Travel, and Learning buddies. Setup presents them as a
+   pick-list: install the ones you want now, keep the other cards for
+   later, and create entirely new buddies whenever you like.
 4. **Run the dashboard.** `python3 build.py` builds `index.html` from the
    registry. Enable GitHub Pages on your repo and it's live.
 5. **Grow it.** Every new buddy gets a registry entry, a repo of its own
