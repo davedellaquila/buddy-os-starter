@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Testing Guide — Buddy OS Starter</title>
+<style>
+:root { color-scheme: light dark; --ink:#1d2733; --muted:#5b6b7c; --bg:#fdfcfa; --card:#ffffff; --line:#e3ded4; --accent:#0f6f5c; }
+@media (prefers-color-scheme: dark) {
+  :root { --ink:#e8e4da; --muted:#a7a294; --bg:#16181d; --card:#1e2126; --line:#33363d; --accent:#5ec9ae; }
+}
+* { box-sizing: border-box; }
+body { margin:0; background:var(--bg); color:var(--ink);
+  font:17px/1.65 -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+header.site { border-bottom:1px solid var(--line); background:var(--card); }
+header.site .in { max-width:760px; margin:0 auto; padding:14px 22px; display:flex; gap:18px; align-items:baseline; flex-wrap:wrap; }
+header.site .brand { font-weight:700; letter-spacing:.02em; }
+header.site nav a { color:var(--muted); text-decoration:none; margin-right:14px; }
+header.site nav a.here { color:var(--accent); font-weight:600; }
+main { max-width:760px; margin:0 auto; padding:28px 22px 56px; }
+h1 { font-size:30px; line-height:1.25; margin:0 0 18px; }
+h2 { font-size:22px; margin:34px 0 10px; }
+h3 { font-size:18px; margin:26px 0 8px; }
+a { color:var(--accent); }
+code { background:var(--card); border:1px solid var(--line); border-radius:5px; padding:0 5px; font-size:.92em; }
+hr { border:none; border-top:1px solid var(--line); margin:30px 0; }
+footer { max-width:760px; margin:0 auto; padding:0 22px 40px; color:var(--muted); font-size:14px; }
+</style>
+</head>
+<body>
+<header class="site"><div class="in">
+  <span class="brand">🧭 Buddy OS Starter</span>
+  <nav><a href="start-here.html">Start Here</a><a href="testing.html" class="here">Testing Guide</a></nav>
+</div></header>
+<main>
+<h1>Testing Buddy OS — the advanced guide</h1>
+<p><em>For testers evaluating the system. If you're setting up your own Buddy OS
+to use it, <a href="start-here.html">START-HERE.md</a> is your guide — read that first;
+this one goes under the hood.</em></p>
+<h2>How the machinery actually works</h2>
+<p><strong>The registry is the single source of truth.</strong> <code>buddies.json</code> holds one
+entry per buddy: identity (name, icon, persona), tree position (parent),
+repo, status, its open <strong>attention items</strong>, and its files list. Attention
+items carry disposition stamps — <code>cleared</code>, <code>later</code>, <code>dropped</code>, each
+<code>{date, by}</code> — written by the action buttons. If a fact about a buddy
+matters, it lives here or it doesn't live anywhere.</p>
+<p><strong>The dashboard is a build, not an app.</strong> <code>build.py</code> renders <code>index.html</code>
+from the registry, <code>plans.json</code>, and the <code>buddy-tree.html</code> fragments.
+<code>index.html</code> is a generated file — never hand-edit it; change the sources
+and rebuild. The same rule applies to homepages: <code>gen_basic_homepages.py</code>
+builds the standard pages, <code>gen_default_homepages.py</code> builds dossier-style
+pages and every About page, baking registry data (attention tiles with the
+full action set, Files sections) into static HTML.</p>
+<p><strong>Writes are token-gated.</strong> The action buttons (Done / Need more info /
+Later / Drop it / ✎ Add a note…) write through the GitHub Contents API
+using a fine-grained token stored on the device: dispositions stamp the
+registry entry; info requests and notes append to the owning buddy's
+<code>docs/ingest.md</code>. With no token on the device, actions still record
+locally and the page says plainly that they didn't sync. Nothing ever
+fails silently — that honesty is part of the design, so test it.</p>
+<p><strong>Instances are parameterized.</strong> <code>instance.json</code> (owner, GitHub account,
+system repo, Pages URL, tip jar, root order, root name) is the only file
+that says whose system this is. The machinery carries placeholders the
+build substitutes; that's how the same code serves every user.</p>
+<p><strong>Upgrades are documents, not magic.</strong> <code>UPGRADING.md</code> carries one section
+per release: what changed, what to adopt, what to leave alone. Adopting =
+take the new machinery files, keep your data files (registry, instance
+config, your buddies' content), regenerate.</p>
+<h2>A suggested test route</h2>
+<ol>
+<li><strong>Create a private copy</strong> from the template ("Use this template") and
+   run <a href="SETUP.md">SETUP.md</a> with your Muse, for real. Note every place
+   you hesitate — hesitation is the feedback gold.</li>
+<li><strong>Use the pick-list honestly.</strong> Install two of the six optional
+   buddies, skip the rest. Confirm the skipped buddies' brief cards are
+   still in <code>samples/</code> afterwards (nothing was deleted), then install one
+   of the skipped ones a day later.</li>
+<li><strong>Exercise the action buttons.</strong> On the Coordinator's homepage and in
+   the dashboard panel: mark the sample item Done, another Later, add a
+   note. With the token set up, check the registry stamp and the
+   <code>docs/ingest.md</code> entry landed. Then revoke/remove the token on one
+   device and confirm the buttons degrade honestly instead of erroring.</li>
+<li><strong>Create a buddy of your own</strong> — something the starter never imagined
+   (a garden, a boat, a thesis). The system should bend; note where it
+   creaks.</li>
+<li><strong>Apply an upgrade.</strong> Pull the current release's machinery files into
+   your copy per UPGRADING.md, regenerate, and confirm your buddies, your
+   dispositions, and your notes all survived untouched.</li>
+<li><strong>Live in it for a few days.</strong> The morning question — <em>"what's open,
+   what's stuck, what needs me?"</em> — is the real test. Does the staff
+   answer it?</li>
+</ol>
+<h2>Feedback: what's wanted, and how to send it</h2>
+<p>Wanted, in order of value:</p>
+<ul>
+<li><strong>Where you got stuck</strong> — the exact step, what you expected, what
+  happened. A screenshot beats a paragraph.</li>
+<li><strong>What surprised you</strong> — pleasantly or not.</li>
+<li><strong>Anything that felt unsafe</strong> — a moment you weren't sure what a button
+  would do, or what would become public.</li>
+<li><strong>What you'd never use</strong> — dead weight is a finding too.</li>
+</ul>
+<p>Send it as an <strong>issue in this repository</strong>, or hand it to the person who
+invited you to test. Either route reaches the maintainer.</p>
+<h2>Known rough edges in v1 (don't re-report these)</h2>
+<ul>
+<li><strong>Muse only.</strong> SETUP.md is written for the user's Muse specifically;
+  other agents aren't supported yet (an any-agent variant is a standing
+  future task).</li>
+<li><strong>GitHub only.</strong> No GitLab/Bitbucket path in v1.</li>
+<li><strong>No visitor counter.</strong> The starter dashboard deliberately ships
+  without one (the original pointed at the author's own analytics
+  endpoint; an instance-configurable version may come).</li>
+<li><strong>Generated files everywhere.</strong> Editing a homepage or the dashboard
+  directly is always overwritten by the next build — changes belong in
+  the registry, the instance config, or the generators.</li>
+<li><strong>Voices are environment-dependent.</strong> A sample persona roster and the
+  voice catalog ship as data, but spoken audio depends on the user's own
+  Muse setup; text is the guaranteed surface.</li>
+<li><strong>Upgrades are manual.</strong> Read UPGRADING.md, adopt, regenerate. There
+  is no auto-updater in v1 — by design, so nothing changes under you.</li>
+</ul>
+</main>
+<footer>Generated from TESTING.md — edit the markdown, not this page.
+Buddy OS Starter is MIT-licensed; your copy of it is yours.</footer>
+</body>
+</html>

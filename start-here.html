@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Start Here — Buddy OS Starter</title>
+<style>
+:root { color-scheme: light dark; --ink:#1d2733; --muted:#5b6b7c; --bg:#fdfcfa; --card:#ffffff; --line:#e3ded4; --accent:#0f6f5c; }
+@media (prefers-color-scheme: dark) {
+  :root { --ink:#e8e4da; --muted:#a7a294; --bg:#16181d; --card:#1e2126; --line:#33363d; --accent:#5ec9ae; }
+}
+* { box-sizing: border-box; }
+body { margin:0; background:var(--bg); color:var(--ink);
+  font:17px/1.65 -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+header.site { border-bottom:1px solid var(--line); background:var(--card); }
+header.site .in { max-width:760px; margin:0 auto; padding:14px 22px; display:flex; gap:18px; align-items:baseline; flex-wrap:wrap; }
+header.site .brand { font-weight:700; letter-spacing:.02em; }
+header.site nav a { color:var(--muted); text-decoration:none; margin-right:14px; }
+header.site nav a.here { color:var(--accent); font-weight:600; }
+main { max-width:760px; margin:0 auto; padding:28px 22px 56px; }
+h1 { font-size:30px; line-height:1.25; margin:0 0 18px; }
+h2 { font-size:22px; margin:34px 0 10px; }
+h3 { font-size:18px; margin:26px 0 8px; }
+a { color:var(--accent); }
+code { background:var(--card); border:1px solid var(--line); border-radius:5px; padding:0 5px; font-size:.92em; }
+hr { border:none; border-top:1px solid var(--line); margin:30px 0; }
+footer { max-width:760px; margin:0 auto; padding:0 22px 40px; color:var(--muted); font-size:14px; }
+</style>
+</head>
+<body>
+<header class="site"><div class="in">
+  <span class="brand">🧭 Buddy OS Starter</span>
+  <nav><a href="start-here.html" class="here">Start Here</a><a href="testing.html">Testing Guide</a></nav>
+</div></header>
+<main>
+<h1>Start here 👋</h1>
+<p><em>This guide is for you, the person. The other guide — <a href="SETUP.md">SETUP.md</a> —
+is written for your Muse, who will do the building. You don't need to
+read that one; this one tells you what will happen and what to expect.</em></p>
+<h2>What is this?</h2>
+<p><strong>Buddy OS is a staff, not an app.</strong> You get a small team of "buddies" —
+little specialist helpers, each with one job (reading, fitness, budget,
+home, travel, learning, whatever you invent) — who keep a homepage each,
+track what's open, and report to one coordinator.</p>
+<p>And above the staff sits <strong>your Muse — your chief of staff.</strong> That's who
+you actually talk to. Your Muse runs the setup, directs the buddies, and
+brings you the results. One distinction worth knowing: the <strong>Coordinator</strong>
+buddy is <em>not</em> your chief of staff — it's a project-tracking buddy inside
+the staff, keeping an eye on projects and open items. Your chief of staff
+is the Muse you're chatting with; the Coordinator works for them.</p>
+<p>Everything lives in a GitHub repository <strong>you own</strong>. The buddies' pages and
+dashboard are just files in that repo, shown as web pages. Your data is
+yours, in plain text, forever readable.</p>
+<h2>What you need</h2>
+<h3>Must have before starting</h3>
+<ul>
+<li><strong>A Muse account on a paid plan.</strong> Your own Muse runs the whole
+  system — it reads the setup guide, builds your buddies, and staffs your
+  days. Honestly stated: <strong>this is the one real cost.</strong> Everything else
+  below rides free tiers.</li>
+<li><strong>A GitHub account</strong> (free is fine). Your copy of the starter, your
+  buddies' pages, and your dashboard all live there.</li>
+<li><strong>A Google account</strong> (a Gmail address). The system keeps its documents
+  in Google Docs and its registers and trackers in Google Sheets — that's
+  where your buddies' paperwork lives.</li>
+</ul>
+<h3>Created during setup — nothing to prepare</h3>
+<p>Your Muse makes these with you, when they're needed:</p>
+<ul>
+<li><strong>Your own copy of this starter repo</strong> — guided to be <em>private</em>, so
+  your buddies and your life in them stay yours.</li>
+<li><strong>Your instance config</strong> — a small file with your name and addresses
+  that makes the generic machinery yours.</li>
+<li><strong>A fine-grained GitHub token</strong> for the write-back buttons — created
+  in the token step below, with the safety framing spelled out there.</li>
+</ul>
+<h3>Not needed — deliberately</h3>
+<p>This list is here on purpose, because these are the things people assume
+they'd need and don't:</p>
+<ul>
+<li><strong>No server.</strong> GitHub hosts everything.</li>
+<li><strong>No custom domain.</strong> The free <code>github.io</code> address works fine.</li>
+<li><strong>No coding knowledge.</strong> Your Muse writes the code; you make the
+  decisions.</li>
+<li><strong>No credit card beyond the Muse plan.</strong> Free tiers carry the rest.</li>
+</ul>
+<h2>What will happen</h2>
+<p>Your Muse follows SETUP.md. In plain terms:</p>
+<ol>
+<li><strong>A short interview.</strong> Your Muse asks what you'd like help with, what
+   to call you, and a few preferences. Two minutes, conversational.</li>
+<li><strong>You make a private copy.</strong> This template is public, but <em>your</em> copy —
+   with your buddies and your life in it — should be <strong>private</strong>. Your
+   Muse will steer you to create it that way.</li>
+<li><strong>You meet your first buddy.</strong> Together you shape the Coordinator, the
+   project tracker at the center of the staff.</li>
+<li><strong>You pick your starting staff.</strong> Six more buddies are offered as a
+   menu — Reading, Fitness, Budget, Home, Travel, Learning. Pick the ones
+   you want now. The rest aren't deleted; their cards stay in your copy so
+   you can install any of them later, and you can invent entirely new
+   buddies whenever you like. The menu is a starting set, not a ceiling.</li>
+<li><strong>Pages appear.</strong> Your Muse generates your dashboard and each buddy's
+   homepage, and walks you through turning on GitHub Pages so you can see
+   them in a browser.</li>
+<li><strong>One careful step: the token</strong> (next section). Then you're running.</li>
+</ol>
+<h2>The token step, in plain language</h2>
+<p>Some buttons on your dashboard and homepages <em>do</em> things — marking a task
+done, adding a note. For a web page to save a change into your GitHub repo,
+GitHub asks: <em>who is allowed to write here?</em> A <strong>token</strong> is your answer —
+a key that says "this is me, and this page may write to my repo."</p>
+<p>Your Muse will walk you through creating one, with this framing, and
+you should hold it to every word:</p>
+<ul>
+<li>It's created in <strong>your GitHub account</strong>, for <strong>one permission only</strong>
+  (read/write contents of your repos — nothing else).</li>
+<li>You'll paste it into a settings field <strong>on your own device</strong>, where it
+  stays.</li>
+<li><strong>Never paste a token into a chat</strong> — not with your Muse, not anywhere.
+  If anything ever asks you to, stop and ask why.</li>
+<li>You can revoke it in GitHub settings at any time, instantly. Nothing is
+  locked in.</li>
+</ul>
+<p>Until you add the token, everything still works for <em>viewing</em>; buttons
+simply save on that device only, and the page will tell you so honestly.</p>
+<h2>Check the results with your own eyes</h2>
+<p>When setup finishes, your Muse will give you two links. Open them:</p>
+<ul>
+<li><strong>Your dashboard</strong> — your whole staff on one page: every buddy, what's
+  waiting on you, what changed. This is the page you'll live in.</li>
+<li><strong>Your Coordinator's homepage</strong> — one buddy's page: its brief, its open
+  items, its files. Every buddy's page looks like this.</li>
+</ul>
+<p>Click a task on the Coordinator's page and mark it done. That's the whole
+system in one gesture: a page that's also a tool.</p>
+<h2>Day two</h2>
+<ul>
+<li>Ask your Muse to install another buddy from the cards, or invent one
+  of your own ("I want a buddy who tracks my garden").</li>
+<li>Anything you'd otherwise lose — a link, a half-thought, a receipt — can
+  be <em>dumped</em> into a buddy's inbox from its homepage; your Muse files it.</li>
+<li>Once a week, ask your chief of staff: <em>"What's open, what's stuck, what
+  needs me?"</em> That question is what the whole staff exists to answer.</li>
+</ul>
+<p>Welcome aboard. 🧭</p>
+<hr />
+<p><em>Evaluating Buddy OS for someone else, or want the machinery explained?
+The <a href="testing.html">tester guide</a> is the deeper path.</em></p>
+</main>
+<footer>Generated from START-HERE.md — edit the markdown, not this page.
+Buddy OS Starter is MIT-licensed; your copy of it is yours.</footer>
+</body>
+</html>

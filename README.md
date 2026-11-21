@@ -6,6 +6,16 @@ a registry (`buddies.json`), a dashboard, and a homepage for every buddy.
 
 This starter is the system with nobody's life in it yet. You bring the life.
 
+**New here? Read [START-HERE.md](START-HERE.md) first** — the short human
+companion guide: what this is, what to expect, and the one careful step, in
+plain language. Evaluating the system instead? The
+[tester guide](TESTING.md) is the deeper path. Both guides are also
+published as web pages on this repo's GitHub Pages site —
+`start-here.html` and `testing.html` — once Pages is enabled: those are
+the plain links you can send a person. (They're generated from the
+markdown by `build_guides.py`, so the web pages and the documents can
+never drift apart.)
+
 ## The 10-minute tour
 
 1. **Make your copy.** Click **Use this template** → create the repository
@@ -29,6 +39,8 @@ This starter is the system with nobody's life in it yet. You bring the life.
 
 | Piece | What it is |
 |---|---|
+| `START-HERE.md` | The human companion guide — read this first |
+| `TESTING.md` | The advanced tester guide |
 | `SETUP.md` | First-run guide, written for your Muse |
 | `build.py` | Builds the dashboard (`index.html`) from the registry |
 | `gen_basic_homepages.py` | Generates buddy homepages |
@@ -39,6 +51,7 @@ This starter is the system with nobody's life in it yet. You bring the life.
 | `docs/` | Concepts, the registry format, the homepage rubric, standing orders |
 | `AGENTS.md` | Operating conventions — adopt, edit, make them yours |
 | `UPGRADING.md` | How starter releases reach your copy |
+| `build_guides.py` | Renders the two guides as the Pages website |
 
 ## License
 

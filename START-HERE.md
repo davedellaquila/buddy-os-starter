@@ -123,3 +123,8 @@ system in one gesture: a page that's also a tool.
   needs me?"* That question is what the whole staff exists to answer.
 
 Welcome aboard. 🧭
+
+---
+
+*Evaluating Buddy OS for someone else, or want the machinery explained?
+The [tester guide](TESTING.md) is the deeper path.*
