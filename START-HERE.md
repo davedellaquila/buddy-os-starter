@@ -18,9 +18,15 @@ buddy is *not* your chief of staff — it's a project-tracking buddy inside
 the staff, keeping an eye on projects and open items. Your chief of staff
 is the Muse you're chatting with; the Coordinator works for them.
 
-Want the thinking behind this? [Buddies All the Way
+### Want the thinking behind this?
+
+[Buddies All the Way
 Down](https://davedellaquila.substack.com/p/objects-all-the-way-down) is
-the architecture story, in the author's words.
+the architecture story, in the author's words — where the staff of
+buddies comes from. And when you reach the pick-list below, [How to
+Choose Your
+Buddies](https://davedellaquila.substack.com/p/how-to-choose-your-buddies)
+is a short guide to choosing well.
 
 Everything lives in a GitHub repository **you own**. The buddies' pages and
 dashboard are just files in that repo, shown as web pages. Your data is
