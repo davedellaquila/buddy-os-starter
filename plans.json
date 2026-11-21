@@ -1,0 +1,16 @@
+{
+  "plans": [
+    {
+      "id": "starter-tour",
+      "name": "Take the starter tour",
+      "icon": "🧭",
+      "buddies": ["coordinator-buddy"],
+      "desc": "The first-week plan that ships with the starter: finish setup with your Muse, meet the seven starter buddies, and turn one brief card into a real buddy of your own.",
+      "docs": [
+        {"label": "Setup guide (SETUP.md)", "url": "SETUP.md"}
+      ],
+      "status": "Start here",
+      "statusClass": "st-active"
+    }
+  ]
+}

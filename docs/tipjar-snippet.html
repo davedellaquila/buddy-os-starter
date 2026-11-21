@@ -1,0 +1,20 @@
+<!--
+  TIP JAR — canonical snippet (Buddy OS Starter).
+  Every buddy homepage carries the tip jar: a compact bug in the page's
+  header row. A reader who got value can say thanks.
+
+  The href is the %%TIPJAR_URL%% placeholder: build/generation substitutes
+  the tipjar_url from instance.json. Leave tipjar_url empty and the jar
+  links nowhere (#) — set it during setup if you want tips.
+
+  USAGE: the generators read this file and extract the <style> block and
+  the <a class="header-tip"> anchor line automatically. Do not rename the
+  class; keep the anchor on its own line starting with "<a ".
+-->
+<style>
+.header-tip{margin-left:auto;flex:none;display:inline-flex;align-items:center;gap:6px;
+  font-size:13px;font-weight:600;color:var(--text,#e6edf3);text-decoration:none;
+  border:1px solid var(--border,#30363d);border-radius:999px;padding:4px 12px;background:var(--card,#161b22)}
+.header-tip:hover{border-color:var(--accent,#58a6ff)}
+</style>
+<a class="header-tip" href="%%TIPJAR_URL%%" target="_blank" rel="noopener" title="Support this project">🫙 Tip the jar</a>

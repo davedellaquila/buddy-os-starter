@@ -1,0 +1,102 @@
+{
+  "buddies": [
+    {
+      "id": "coordinator-buddy",
+      "name": "Coordinator",
+      "icon": "🧭",
+      "kind": "system",
+      "type": "project",
+      "parent": null,
+      "brief": "Your chief of staff: keeps the whole staff's status in view, tracks open items, and makes sure nothing quietly drops.",
+      "homepage": "coordinator-buddy/",
+      "repo": "coordinator-buddy",
+      "status": "active",
+      "attention": [
+        {
+          "id": "coordinator-first-buddy",
+          "text": "Finish setup with your Muse and turn one brief card into your first real buddy",
+          "date": "2026-11-21"
+        }
+      ],
+      "files": [
+        {
+          "title": "Brief card",
+          "path": "samples/coordinator-buddy/BRIEF.md",
+          "note": "The fully-worked sample brief"
+        }
+      ]
+    },
+    {
+      "id": "reading-buddy",
+      "name": "Reading Buddy",
+      "icon": "📚",
+      "kind": "personal",
+      "type": "buddy",
+      "parent": "coordinator-buddy",
+      "brief": "Reading list, notes, and the book you meant to finish.",
+      "homepage": "reading-buddy/",
+      "repo": "reading-buddy",
+      "status": "brief"
+    },
+    {
+      "id": "fitness-buddy",
+      "name": "Fitness Buddy",
+      "icon": "🏃",
+      "kind": "personal",
+      "type": "buddy",
+      "parent": "coordinator-buddy",
+      "brief": "Workouts, walks, and staying consistent.",
+      "homepage": "fitness-buddy/",
+      "repo": "fitness-buddy",
+      "status": "brief"
+    },
+    {
+      "id": "budget-buddy",
+      "name": "Budget Buddy",
+      "icon": "🧾",
+      "kind": "personal",
+      "type": "buddy",
+      "parent": "coordinator-buddy",
+      "brief": "Household spending, bills, and what is due when.",
+      "homepage": "budget-buddy/",
+      "repo": "budget-buddy",
+      "status": "brief"
+    },
+    {
+      "id": "home-buddy",
+      "name": "Home Buddy",
+      "icon": "🏠",
+      "kind": "personal",
+      "type": "buddy",
+      "parent": "coordinator-buddy",
+      "brief": "Household projects, maintenance, and the fix-it list.",
+      "homepage": "home-buddy/",
+      "repo": "home-buddy",
+      "status": "brief"
+    },
+    {
+      "id": "travel-buddy",
+      "name": "Travel Buddy",
+      "icon": "🧳",
+      "kind": "personal",
+      "type": "buddy",
+      "parent": "coordinator-buddy",
+      "brief": "Trip planning, itineraries, logistics.",
+      "homepage": "travel-buddy/",
+      "repo": "travel-buddy",
+      "status": "brief"
+    },
+    {
+      "id": "learning-buddy",
+      "name": "Learning Buddy",
+      "icon": "🌱",
+      "kind": "personal",
+      "type": "buddy",
+      "parent": "coordinator-buddy",
+      "brief": "Courses, skills, and what to learn next.",
+      "homepage": "learning-buddy/",
+      "repo": "learning-buddy",
+      "status": "brief"
+    }
+  ]
+}

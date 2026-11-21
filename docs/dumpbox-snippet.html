@@ -1,0 +1,431 @@
+<!-- BRAIN-DUMP BOX — canonical snippet (Buddy OS Starter).
+  The generators carry this box inline (DUMPBOX_CSS/HTML/JS in
+  gen_basic_homepages.py) and inject it into every homepage with
+  __BID__/__BNAME__ replaced per buddy. This file is the readable
+  reference copy; edit the generator consts to change behavior. -->
+<style>
+.dumpbox {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px 22px;
+  margin-bottom: 32px;
+}
+.dumpbox h2 { margin: 0 0 6px; font-size: 20px; }
+.dumpbox-sub { color: var(--muted); font-size: 14px; margin-bottom: 14px; }
+.dumpbox textarea {
+  width: 100%; min-height: 96px; resize: vertical;
+  background: var(--bg); border: 1px solid var(--border); border-radius: 8px;
+  padding: 10px 12px; font-size: 14px; color: var(--text); font-family: inherit;
+}
+.dumpbox textarea:focus { outline: none; border-color: var(--accent); }
+.dumpbox textarea:disabled { opacity: .55; }
+.dumpbox-row { display: flex; align-items: center; gap: 12px; margin-top: 10px; flex-wrap: wrap; }
+.dumpbox-btn {
+  background: var(--accent); color: #fff; border: none; border-radius: 8px;
+  padding: 9px 22px; font-size: 14px; font-weight: 600; cursor: pointer;
+}
+.dumpbox-btn:disabled { opacity: .45; cursor: default; }
+.dumpbox-btn.saved { background: var(--ok); }
+.dumpbox-status { font-size: 13px; color: var(--muted); }
+.dumpbox-status.flash { color: var(--ok); font-weight: 700; }
+.dumpbox-hint { font-size: 12px; color: var(--muted); margin-top: 8px; }
+.dumpbox-addimg {
+  background: transparent; color: var(--text); border: 1px solid var(--border);
+  border-radius: 8px; padding: 8px 16px; font-size: 14px; font-weight: 600; cursor: pointer;
+}
+.dumpbox-addimg:hover { border-color: var(--accent); color: var(--accent); }
+.dumpbox-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.dumpbox-chips:empty { display: none; }
+.dumpbox-chip {
+  display: inline-flex; align-items: center; gap: 7px; background: var(--card);
+  border: 1px solid var(--border); border-radius: 8px; padding: 4px 6px 4px 4px;
+  font-size: 12px; max-width: 100%;
+}
+.dumpbox-chip img { width: 32px; height: 32px; object-fit: cover; border-radius: 5px; }
+.dumpbox-chip .dc-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 140px; }
+.dumpbox-chip .dc-x { background: none; border: 0; color: var(--muted); cursor: pointer; font-size: 14px; line-height: 1; padding: 4px; }
+.dumpbox-token {
+  /* Designer, 2026-10-19 (Owner's ask): amber, not zebra. A solid amber frame +
+     a soft amber wash says "one small step needs you" — zebra striping is
+     hazard tape, it signals danger and fights every calm surface around it.
+     Dashed grey read as placeholder; solid amber reads as deliberate. */
+  background: rgba(245, 158, 11, .09);
+  background: color-mix(in srgb, #f59e0b 9%, var(--bg));
+  border: 2px solid #f59e0b;
+  box-shadow: 0 0 0 3px rgba(245, 158, 11, .16);
+  box-shadow: 0 0 0 3px color-mix(in srgb, #f59e0b 16%, transparent);
+  border-radius: 8px;
+  padding: 12px 14px; margin-bottom: 12px; font-size: 14px;
+}
+.dumpbox-token p { margin-bottom: 8px; font-weight: 700; color: #cf222e; }
+@media (prefers-color-scheme: dark) { .dumpbox-token p { color: #ff7b72; } }
+.dumpbox-tokenrow { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.dumpbox-tokenrow input {
+  flex: 1; min-width: 170px; background: var(--card); border: 1px solid var(--border);
+  border-radius: 8px; padding: 7px 10px; font-size: 13px; color: var(--text);
+}
+.dumpbox-tokenrow button {
+  background: transparent; color: var(--accent); border: 1px solid var(--accent);
+  border-radius: 8px; padding: 7px 14px; font-size: 13px; font-weight: 600; cursor: pointer;
+}
+.dumpbox-tokenrow a { color: var(--accent); font-size: 13px; }
+</style>
+
+<section class="dumpbox" data-buddy-id="__BID__">
+<h2>🧠 Brain dump</h2>
+<p class="dumpbox-sub">Dump what's on your mind about <span data-buddy-name>__BNAME__</span> — raw and unfiltered. Each dump lands in the buddy's repo (docs/ingest.md) as a timestamped entry — or saves on this device until a repo is linked and a token is connected.</p>
+<div class="dumpbox-token" hidden>
+<p>🔒 Connect GitHub to unlock dumping. Paste a token once — it stays on this device only.</p>
+<div class="dumpbox-tokenrow">
+<input type="password" placeholder="GitHub token (repo scope)" aria-label="GitHub token">
+<button type="button">Save token</button>
+<a href="https://github.com/settings/tokens" target="_blank" rel="noopener">Get a token</a>
+</div>
+</div>
+<textarea rows="4" placeholder="Dump what's on your mind about __BNAME__…"></textarea>
+<div class="dumpbox-row">
+<div class="dumpbox-chips"></div>
+<button type="button" class="dumpbox-btn">Dump it</button>
+<button type="button" class="dumpbox-addimg">🖼️ Add image</button>
+<span class="dumpbox-status" role="status"></span>
+</div>
+<p class="dumpbox-hint">Enter dumps it &middot; Shift+Enter for a new line &middot; Images shrink to 1600px wide before upload — the original stays in your library</p>
+</section>
+
+<script>
+<script>
+(function(){
+  var box = document.querySelector('.dumpbox');
+  if (!box || box.dataset.dumpInit) return;
+  box.dataset.dumpInit = '1';
+  var bid = box.getAttribute('data-buddy-id') || (function(){
+    var p = location.pathname.replace(/\/+$/, '');
+    return p.substring(p.lastIndexOf('/') + 1);
+  })();
+  var ta = box.querySelector('textarea'),
+      btn = box.querySelector('.dumpbox-btn'),
+      st = box.querySelector('.dumpbox-status'),
+      tokWrap = box.querySelector('.dumpbox-token'),
+      chipsBox = box.querySelector('.dumpbox-chips'),
+      addBtn = box.querySelector('.dumpbox-addimg');
+  /* Image attachments (Owner 2026-11-08): picked photos shrink on the device
+     first (<=1600px JPEG; the original stays in the Photos library), then
+     ride the dump into the buddy's repo under docs/ingest-files/<ts>/ and
+     are listed with links in the ingest entry — the same mechanics as the
+     dashboard's Universal Dump files. */
+  var dumpFiles = [];
+  function lsGet(){ try { return JSON.parse(localStorage.getItem('buddyTree.v3') || '{}'); } catch(e){ return {}; } }
+  function lsSet(patch){ try { var s = lsGet(); for (var k in patch) s[k] = patch[k]; localStorage.setItem('buddyTree.v3', JSON.stringify(s)); } catch(e){} }
+  function token(){ return lsGet().ghToken || ''; }
+  function b64OfBlob(blob){
+    return new Promise(function(res, rej){
+      var fr = new FileReader();
+      fr.onload = function(){ res(String(fr.result).split(',')[1]); };
+      fr.onerror = rej;
+      fr.readAsDataURL(blob);
+    });
+  }
+  function loadHeic(){
+    return new Promise(function(res, rej){
+      if (window.heic2any) return res();
+      var sc = document.createElement('script');
+      sc.src = 'https://cdn.jsdelivr.net/npm/heic2any@0.0.4/dist/heic2any.min.js';
+      sc.onload = res; sc.onerror = rej;
+      document.head.appendChild(sc);
+    });
+  }
+  var DUMP_FILE_MAX = 1024 * 1024;
+  function fmtSize(n){ return n >= 1048576 ? (n / 1048576).toFixed(1) + ' MB' : Math.max(1, Math.round(n / 1024)) + ' KB'; }
+  async function shrinkImage(file){
+    var blob = file;
+    if (/\\.hei[cf]$/i.test(file.name || '') || file.type === 'image/heic' || file.type === 'image/heif') {
+      await loadHeic();
+      blob = await window.heic2any({blob: file, toType: 'image/jpeg', quality: 0.92});
+    }
+    var bmp = await createImageBitmap(blob);
+    var scale = Math.min(1, 1600 / Math.max(bmp.width, bmp.height));
+    var out = blob, outName = file.name || 'image.jpg';
+    if (scale < 1 || !/jpe?g$/i.test(blob.type || '')) {
+      var c = document.createElement('canvas');
+      c.width = Math.max(1, Math.round(bmp.width * scale));
+      c.height = Math.max(1, Math.round(bmp.height * scale));
+      c.getContext('2d').drawImage(bmp, 0, 0, c.width, c.height);
+      var jb = await new Promise(function(res){ c.toBlob(res, 'image/jpeg', 0.85); });
+      if (jb) { out = jb; outName = outName.replace(/\\.[^.]+$/, '') + '.jpg'; }
+    }
+    if (bmp.close) bmp.close();
+    return { name: outName, type: 'image/jpeg', b64: await b64OfBlob(out), size: out.size };
+  }
+  async function prepareImages(fileList, notes){
+    var list = Array.prototype.slice.call(fileList || []).filter(function(f){ return f.type.indexOf('image/') === 0 || /\\.hei[cf]$/i.test(f.name || ''); });
+    var out = [];
+    for (var i = 0; i < list.length; i++) {
+      var f = list[i];
+      try {
+        var rec = await shrinkImage(f);
+        if (rec.size > DUMP_FILE_MAX) { notes.push('“' + rec.name + '” is still ' + fmtSize(rec.size) + ' after shrinking — over the 1 MB upload limit, so it was not attached.'); continue; }
+        out.push(rec);
+      } catch(e) { notes.push('“' + (f.name || 'image') + '” could not be prepared — not attached.'); }
+    }
+    return out;
+  }
+  function fileSlug(name){ return String(name || 'file').replace(/[^A-Za-z0-9._-]+/g, '-').replace(/^-+|-+$/g, '') || 'file'; }
+  function folderOf(t){
+    var d = new Date(t), z = function(n){ return String(n).padStart(2, '0'); };
+    return d.getFullYear() + z(d.getMonth() + 1) + z(d.getDate()) + '-' + z(d.getHours()) + z(d.getMinutes()) + z(d.getSeconds());
+  }
+  function entryBody(text, paths){
+    var NL = String.fromCharCode(10);
+    var body = text || '';
+    if (paths && paths.length) {
+      if (body) body += NL + NL;
+      body += 'Files:' + paths.map(function(pp){ return NL + '- [' + pp.split('/').pop() + '](https://github.com/%%GH_OWNER%%/' + repo + '/blob/master/' + pp + ')'; }).join('');
+    }
+    return body;
+  }
+  async function uploadFiles(files, whenMs){
+    var paths = [];
+    if (!files || !files.length) return paths;
+    var folder = 'docs/ingest-files/' + folderOf(whenMs) + '/';
+    for (var i = 0; i < files.length; i++) {
+      var path = folder + fileSlug(files[i].name);
+      await ghApi('/repos/%%GH_OWNER%%/' + repo + '/contents/' + path, 'PUT',
+        {message: 'Dump image for ' + bid, content: files[i].b64});
+      paths.push(path);
+    }
+    return paths;
+  }
+  function escChip(t){
+    return String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+  function renderChips(){
+    if (!chipsBox) return;
+    chipsBox.innerHTML = dumpFiles.map(function(f, i){
+      return '<span class="dumpbox-chip"><img alt="" src="data:' + (f.type || 'image/jpeg') + ';base64,' + f.b64 + '"><span class="dc-name">' + escChip(f.name) + '</span><button type="button" class="dc-x" data-dc-x="' + i + '" aria-label="Remove ' + escChip(f.name) + '">×</button></span>';
+    }).join('');
+  }
+  function b64encode(str){
+    var bytes = new TextEncoder().encode(str), bin = '';
+    bytes.forEach(function(b){ bin += String.fromCharCode(b); });
+    return btoa(bin);
+  }
+  async function ghApi(path, method, body){
+    var t = token();
+    if (!t) throw new Error('Add a GitHub token first.');
+    var r = await fetch('https://api.github.com' + path, {
+      method: method || 'GET',
+      headers: {'Authorization': 'Bearer ' + t, 'Accept': 'application/vnd.github+json', 'Content-Type': 'application/json'},
+      body: body ? JSON.stringify(body) : undefined
+    });
+    if (!r.ok) throw new Error('GitHub ' + r.status);
+    return r.status === 204 ? null : await r.json();
+  }
+  async function ghGetFile(repo, path){
+    try {
+      var j = await ghApi('/repos/%%GH_OWNER%%/' + repo + '/contents/' + path);
+      if (j && j.content) return {
+        text: new TextDecoder().decode(Uint8Array.from(atob(j.content.replace(/\n/g, '')), function(c){ return c.charCodeAt(0); })),
+        sha: j.sha
+      };
+    } catch(e){}
+    return null;
+  }
+  var repo = null, repoName = bid;
+  async function resolveRepo(){
+    try {
+      var r = await fetch('../buddies.json', {cache: 'no-store'});
+      var d = await r.json();
+      var buds = d.buddies || [];
+      for (var i = 0; i < buds.length; i++) {
+        if (buds[i].id === bid && buds[i].repo) { repo = String(buds[i].repo).split('/').filter(Boolean).pop(); repoName = buds[i].name || bid; break; }
+      }
+    } catch(e){}
+  }
+  /* Local fallback (Owner 2026-10-15, widened 2026-10-16): dumping always works,
+     even with no GitHub token AND no repo linked — entries are saved in this
+     device's localStorage until the GitHub write path can take them. The backlog
+     flushes into the repo on the next successful GitHub dump (once a repo is
+     linked and a token is present). */
+  function localKey(){ return 'buddyTree.ingest.' + bid; }
+  function localBacklog(){
+    try { var a = JSON.parse(localStorage.getItem(localKey()) || '[]'); return Array.isArray(a) ? a : []; }
+    catch(e){ return []; }
+  }
+  function localSave(entry){
+    var a = localBacklog(); a.push(entry);
+    try { localStorage.setItem(localKey(), JSON.stringify(a)); } catch(e){
+      /* Oversize local state (queued photos can exceed the storage quota):
+         keep the text, drop the image bytes, and SAY so on the status line -
+         a queued dump must never vanish silently. */
+      try {
+        var lite = {t: entry.t, text: entry.text};
+        if (entry.files && entry.files.length) lite.filesDropped = entry.files.length;
+        var a2 = localBacklog(); a2.push(lite);
+        localStorage.setItem(localKey(), JSON.stringify(a2));
+        st.textContent = '⚠️ Saved on this device, but the image was too large for this device’s storage — the text is queued and will sync; re-attach the image after connecting GitHub.';
+      } catch(e2){}
+    }
+  }
+  function localClear(){ try { localStorage.removeItem(localKey()); } catch(e){} }
+  /* Split a local backlog entry into (text, file paths) ready for the ingest
+     body: its own already-uploaded paths (first sync attempt), plus a note
+     for any image that could not be kept on this device. */
+  function splitEntry(b){
+    var body = b.text || '';
+    if (b.filesDropped) {
+      var NL = String.fromCharCode(10);
+      body += (body ? NL + NL : '') + '_(' + b.filesDropped + ' image' + (b.filesDropped === 1 ? '' : 's') + ' could not be kept on the device while queued — re-attach from the Photos library.)_';
+    }
+    return body;
+  }
+  function refreshUI(){
+    var has = !!token();
+    tokWrap.hidden = has;
+    /* The box always works: no token and/or no repo just means local saves. */
+    ta.disabled = false;
+    btn.disabled = false;
+    var n = localBacklog().length;
+    if (!repo) {
+      st.textContent = n
+        ? n + ' local ' + (n === 1 ? 'dump' : 'dumps') + ' saved on this device — will sync when a repo is linked.'
+        : 'No repo linked yet — dumps save on this device and will sync when one is linked.';
+      return;
+    }
+    st.textContent = has
+      ? (n ? n + ' local ' + (n === 1 ? 'dump' : 'dumps') + ' will sync on next dump.' : '')
+      : 'No GitHub token — dumps save on this device for now.';
+  }
+  var tokInput = tokWrap.querySelector('input'),
+      tokSave = tokWrap.querySelector('button');
+  /* Visual save confirmation (Owner 2026-10-16): the button flashes green
+     with a ✓ for ~2s on every successful save, so the save is unmissable. */
+  function flashSaved(){
+    var label = btn.textContent;
+    btn.classList.add('saved');
+    btn.textContent = '✓ Saved';
+    st.classList.add('flash');
+    setTimeout(function(){
+      btn.classList.remove('saved');
+      if (btn.textContent === '✓ Saved') btn.textContent = label;
+      st.classList.remove('flash');
+    }, 1800);
+  }
+  /* Owner 2026-10-18: verify the token against GitHub when pasted, so a
+     bad token is caught here instead of surfacing as a mysterious 404 on
+     the next dump. The token is kept either way; dumps queue locally until
+     a working token is in place. */
+  tokSave.addEventListener('click', async function(){
+    var v = tokInput.value.trim();
+    if (!v) return;
+    lsSet({ghToken: v});
+    tokInput.value = '';
+    st.textContent = 'Checking token…';
+    try {
+      await ghApi('/user');
+      refreshUI();
+      st.textContent = '✓ Token verified — dumps will sync to GitHub.';
+    } catch(e) {
+      refreshUI();
+      st.textContent = '⚠ GitHub rejected that token (' + ((e && e.message) || e) + ') — dumps stay on this device until a working token is added.';
+    }
+  });
+  async function dump(){
+    var text = ta.value.trim();
+    var files = dumpFiles.slice();
+    if (!text && !files.length) return;
+    var stamp = new Date().toLocaleString();
+    var whenMs = Date.now();
+    var NL = String.fromCharCode(10);
+    function clearBox(){
+      ta.value = '';
+      dumpFiles = [];
+      renderChips();
+    }
+    if (!repo) {
+      /* No repo linked yet — save on this device; syncs once one is linked. */
+      localSave({t: stamp, text: text, files: files, when: whenMs});
+      clearBox();
+      refreshUI();
+      if (!/too large/.test(st.textContent)) st.textContent = '✓ Saved on this device — will sync to the repo once one is linked.';
+      flashSaved();
+      return;
+    }
+    if (!token()) {
+      /* Temporary workaround: no token → save on this device. */
+      localSave({t: stamp, text: text, files: files, when: whenMs});
+      clearBox();
+      if (!/too large/.test(st.textContent)) st.textContent = '✓ Saved on this device — add a GitHub token to sync it to the repo.';
+      flashSaved();
+      return;
+    }
+    st.textContent = 'Dumping…';
+    btn.disabled = true;
+    try {
+      /* This dump's own paths, then the backlog with each entry's uploads. */
+      var myPaths = await uploadFiles(files, whenMs);
+      var backlog = localBacklog();
+      var parts = [];
+      for (var bi = 0; bi < backlog.length; bi++) {
+        var b = backlog[bi];
+        var bPaths = b.paths ? b.paths.slice() : await uploadFiles(b.files || [], b.when || whenMs);
+        b.paths = bPaths;
+        try { localStorage.setItem(localKey(), JSON.stringify(backlog)); } catch(e){}
+        parts.push('## ' + b.t + NL + NL + entryBody(splitEntry(b), bPaths) + NL + NL);
+      }
+      parts.push('## ' + stamp + NL + NL + entryBody(text, myPaths) + NL + NL);
+      var cur = await ghGetFile(repo, 'docs/ingest.md');
+      var base = cur ? cur.text : '# Ingest log — ' + repoName + NL + NL;
+      var body = {message: 'Ingest dump for ' + bid, content: b64encode(base + parts.join(''))};
+      if (cur && cur.sha) body.sha = cur.sha;
+      await ghApi('/repos/%%GH_OWNER%%/' + repo + '/contents/docs/ingest.md', 'PUT', body);
+      localClear();
+      clearBox();
+      st.textContent = '✓ Dumped to ' + repo + '/docs/ingest.md' + (backlog.length ? ' (' + backlog.length + ' local synced)' : '');
+      flashSaved();
+    } catch(err){
+      /* Owner 2026-10-18: a failed GitHub write must never drop the dump.
+         Keep it on this device and say so plainly, with the backlog count —
+         it syncs on the next successful dump. */
+      try { localSave({t: stamp, text: text, files: files, when: whenMs}); } catch(e2){}
+      clearBox();
+      refreshUI();
+      var why = (err && err.message) || String(err);
+      var nq = 0; try { nq = localBacklog().length; } catch(e2){}
+      var tail = nq > 1 ? ' (' + nq + ' on this device waiting to sync)' : '';
+      st.textContent = (/404/.test(why)
+        ? '⚠ Saved on this device — GitHub said 404 (usually a wrong/expired token, or no access to this private repo). Fix the token, then dump again to sync.'
+        : '⚠ Saved on this device — GitHub said: ' + why + '. It will sync on your next successful dump.') + tail;
+    }
+    btn.disabled = false;
+  }
+  btn.addEventListener('click', dump);
+  ta.addEventListener('keydown', function(ev){
+    /* Owner 2026-10-16: plain Return dumps, like the button. Shift+Return for a newline. */
+    if (ev.key === 'Enter' && !ev.shiftKey && !ev.altKey) { ev.preventDefault(); dump(); }
+  });
+  if (addBtn) addBtn.addEventListener('click', function(){
+    var inp = document.createElement('input');
+    inp.type = 'file'; inp.accept = 'image/*,.heic,.heif'; inp.multiple = true;
+    inp.addEventListener('change', async function(){
+      if (!inp.files || !inp.files.length) return;
+      st.textContent = 'Preparing image…';
+      var notes = [];
+      var recs = await prepareImages(inp.files, notes);
+      dumpFiles = dumpFiles.concat(recs);
+      renderChips();
+      st.textContent = notes.join(' ') || (recs.length ? recs.length + ' image' + (recs.length === 1 ? '' : 's') + ' attached — they ride your next dump.' : '');
+      if (recs.length && !ta.value.trim()) dump();
+    });
+    inp.click();
+  });
+  if (chipsBox) chipsBox.addEventListener('click', function(ev){
+    var x = ev.target.closest('[data-dc-x]');
+    if (!x) return;
+    dumpFiles.splice(parseInt(x.getAttribute('data-dc-x'), 10), 1);
+    renderChips();
+  });
+  resolveRepo().then(refreshUI);
+})();
+</script>
+</script>

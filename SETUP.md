@@ -1,0 +1,126 @@
+# SETUP.md — First Run
+
+**This guide is written for the user's Muse.** If you are the Muse who
+just received a fresh copy of this repository: this is your job now. Work
+through it with your user, in order. Skip nothing silently — where a step
+needs a choice, ask; where a default exists, take it and keep moving.
+
+Your user's copy of this repo should be **private** (the template is public;
+a working Buddy OS holds a life). If their copy is public, say so once and
+offer to walk them through making it private before anything personal goes in.
+
+---
+
+## 1. Interview (10 minutes, conversational)
+
+Learn, in this order:
+
+1. Their name, and what to call them.
+2. Their timezone.
+3. What they care about right now — the 3–5 things a staff should help with.
+4. Who matters to them (people a future buddy may be named for).
+5. Their GitHub username (the copy lives under it).
+
+Defaults rule: persona, voice, and icon choices never block setup. Pick
+sensible defaults; they can change everything later.
+
+## 2. Configure the instance
+
+Create `instance.json` beside `build.py` (start from `instance.example.json`):
+
+```json
+{
+  "owner_name": "<what to call them>",
+  "github_owner": "<their GitHub username>",
+  "system_repo": "<the name of THIS repo in their account>",
+  "pages_url": "",
+  "tipjar_url": "",
+  "root_order": ["coordinator-buddy"]
+}
+```
+
+`pages_url` may stay empty — the build derives
+`https://<github_owner>.github.io/<system_repo>/`. Set `tipjar_url` only if
+they have a tip destination (Ko-fi or similar); empty hides the dashboard's
+tip jar.
+
+## 3. Create the first buddy together: the Coordinator
+
+The starter ships the Coordinator as a fully-worked example
+(`samples/coordinator-buddy/` — brief, config, knowledge). Walk it with your
+user and make it *theirs*:
+
+1. Read the brief card aloud (summarized). Ask: does this job description
+   match what you want from a chief of staff? Edit `BRIEF.md` in their words.
+2. Pick a persona from `persona-roster.md` (default: The Coordinator) and an
+   icon (default 🧭). Record both in the registry entry and `CONFIG.md`.
+3. Confirm the registry entry in `buddies.json` — it is already wired
+   (`parent: null`, `homepage: "coordinator-buddy/"`). The registry format
+   is documented in `docs/registry-format.md`.
+
+## 4. Turn the brief cards into a staff (or don't)
+
+Show the six other starter buddies (`samples/*/BRIEF.md`): Reading, Fitness,
+Budget, Home, Travel, Learning. For each, ask one question: *in or out?*
+Delete the registry entries (and sample folders) for the ones they decline.
+For each keeper, spend two minutes making the brief theirs. Every keeper's
+first task is its own homepage (step 5 generates them).
+
+## 5. Generate homepages and build the dashboard
+
+```bash
+python3 gen_basic_homepages.py            # every buddy's homepage
+python3 gen_default_homepages.py --about coordinator-buddy reading-buddy fitness-buddy budget-buddy home-buddy travel-buddy learning-buddy
+python3 build.py                          # the dashboard: index.html
+```
+
+(Adjust the `--about` list to the buddies they kept.) Then open the
+dashboard locally and walk it together: the tree, the Coordinator's panel,
+its attention item — which is real: *"Finish setup and turn one brief card
+into your first real buddy."* Leave it open; it closes when they've done it.
+
+## 6. Publish with GitHub Pages
+
+In their repo: **Settings → Pages → Deploy from a branch → `main` / root.**
+Their dashboard is then at the `pages_url` from step 2. **Verify on the
+served copy** — open the live URL and confirm the dashboard and the
+Coordinator's homepage render there. A local build is a promise; the served
+copy is the fact.
+
+## 7. The token step (token-gated writes)
+
+The dashboard and homepages write back to GitHub (attention dispositions,
+brain dumps, notes) using a token the user pastes **once, into the page's
+token prompt, on their own device**. Before they create it, give them the
+full framing — this exact shape, every time:
+
+- **Which account:** their GitHub account, the one that owns this repo.
+- **Which single permission:** a classic personal access token with the
+  **`repo`** scope — nothing broader.
+- **What they will see:** GitHub's token page, then the dashboard's token
+  pill turning green. The token is stored only in their browser's local
+  storage on that device.
+- **What must never happen:** the token is never pasted into chat, never
+  written into any file, never committed. If it ever is, it gets revoked
+  and reissued — no exceptions.
+- **Abort condition:** if anything about the page asking for the token looks
+  different from this description, stop and check before pasting.
+
+Walk them to **GitHub → Settings → Developer settings → Personal access
+tokens → Tokens (classic) → Generate new token**, have them tick only
+`repo`, generate, and paste it into the dashboard's token pill (top of the
+page). Then prove it works: disposition the Coordinator's sample attention
+item as **Later** from its homepage, and show them the stamp it wrote into
+`buddies.json`. Undo it together.
+
+## 8. Day two
+
+- Rename a sample buddy into something truly theirs, or create a brand-new
+  one: brief first (use the Coordinator's brief as the pattern), registry
+  entry, homepage. First task is always the homepage.
+- Read `AGENTS.md` together and edit one line so it's theirs.
+- Set a standing rhythm: a morning glance at the dashboard's open items.
+- When a starter release lands, `UPGRADING.md` explains what changed and
+  how to adopt it — you (their Muse) apply it, keeping their data.
+
+Welcome to the staff. Less app, more buddy.

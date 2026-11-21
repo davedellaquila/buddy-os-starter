@@ -1,0 +1,324 @@
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Helvetica, Arial, sans-serif;
+    background: #0d1117;
+    color: #e6edf3;
+    padding: 40px 24px 64px;
+    -webkit-font-smoothing: antialiased;
+  }
+  .page { max-width: 1280px; margin: 0 auto; }
+  header { text-align: center; margin-bottom: 8px; }
+  header .eyebrow {
+    display: inline-block; font-size: 12px; letter-spacing: 2px; text-transform: uppercase;
+    color: #d29922; border: 1px solid #3d2e12; background: #231a08;
+    padding: 6px 14px; border-radius: 999px; margin-bottom: 16px;
+  }
+  header h1 { font-size: 34px; font-weight: 700; letter-spacing: -0.5px; }
+  header p.sub { color: #8b949e; margin-top: 10px; font-size: 15px; }
+  header p.stamp { color: #6e7681; margin-top: 6px; font-size: 12px; }
+
+  .tabs { display: flex; justify-content: center; gap: 8px; margin: 24px 0 8px; }
+  .tabs button {
+    font: inherit; font-size: 14px; font-weight: 600; cursor: pointer;
+    color: var(--muted); background: var(--panel); border: 1px solid var(--border);
+    padding: 9px 22px; border-radius: 999px;
+  }
+  .tabs button.active { color: #0d1117; background: #d29922; border-color: #d29922; }
+  .view { display: none; }
+  .view.active { display: block; }
+
+  /* Content only — #treezoom is the single 2D scrollport (free diagonal pan). */
+  .chart { overflow: visible; padding: 24px 0 8px; }
+  .chart { cursor: grab; }
+  .chart.panning { cursor: grabbing; user-select: none; }
+  .chart.panning * { user-select: none; }
+
+  /* ---- classic CSS org tree ---- */
+  .tree, .tree ul { display: flex; justify-content: center; margin: 0; padding: 0; }
+  .tree ul { padding-top: 20px; position: relative; }
+  .tree li { list-style: none; position: relative; padding: 20px 7px 0; text-align: center; }
+  .tree li::before, .tree li::after {
+    content: ''; position: absolute; top: 0; right: 50%;
+    width: 50%; height: 20px; border-top: 1px solid #2a3547;
+  }
+  .tree li::after { right: auto; left: 50%; border-left: 1px solid #2a3547; }
+  .tree li:only-child::before, .tree li:only-child::after { display: none; }
+  .tree li:only-child { padding-top: 0; }
+  .tree li:first-child::before, .tree li:last-child::after { border: 0 none; }
+  .tree li:last-child::before { border-right: 1px solid #2a3547; border-radius: 0 8px 0 0; }
+  .tree li:first-child::after { border-radius: 8px 0 0 0; }
+  .tree ul ul::before {
+    content: ''; position: absolute; top: 0; left: 50%;
+    width: 0; height: 20px; border-left: 1px solid #2a3547;
+  }
+  .root-stub { width: 0; height: 20px; border-left: 1px solid #2a3547; margin: 0 auto; }
+
+  /* Horizontal org chart (Owner, 2026-10-13) — generations flow left to right.
+     Mirrors the vertical connector logic: vertical spine at left, horizontal stubs. */
+  .tree.tree-horizontal, .tree.tree-horizontal ul { flex-direction: column; justify-content: center; }
+  .tree.tree-horizontal ul { padding-top: 0; padding-left: 0; }
+  .tree.tree-horizontal li { display: flex; align-items: center; padding: 9px 0 9px 26px; text-align: left; }
+  .tree.tree-horizontal li::before, .tree.tree-horizontal li::after {
+    content: ''; position: absolute; left: 0; top: 50%;
+    width: 26px; height: 0; border-top: 1px solid #2a3547; border-left: none; border-right: none;
+  }
+  .tree.tree-horizontal li::after {
+    top: 0; bottom: 0; width: 0; height: auto;
+    border-top: none; border-left: 1px solid #2a3547;
+  }
+  .tree.tree-horizontal li:only-child::before, .tree.tree-horizontal li:only-child::after { display: none; }
+  .tree.tree-horizontal li:only-child { padding-left: 0; }
+  .tree.tree-horizontal li:first-child::after { top: 50%; }
+  .tree.tree-horizontal li:last-child::after { bottom: 50%; }
+  .tree.tree-horizontal ul ul { position: relative; padding-left: 26px; }
+  .tree.tree-horizontal ul ul::before {
+    content: ''; position: absolute; left: 0; top: 50%;
+    width: 26px; height: 0; border-left: none; border-top: 1px solid #2a3547;
+  }
+  .tree.tree-horizontal .root-stub { display: none; }
+
+  .node {
+    display: inline-block; width: 196px; vertical-align: top; position: relative;
+    background: var(--panel); border: 1px solid var(--border); border-top: 3px solid var(--muted);
+    border-radius: 10px; padding: 12px 12px 13px;
+  }
+  .grip {
+    position: absolute; top: 4px; left: 4px; z-index: 2;
+    cursor: grab; opacity: .45; color: var(--muted); font-size: 16px; line-height: 1;
+    padding: 8px; user-select: none; -webkit-user-select: none;
+  }
+  .node:hover .grip { opacity: .9; }
+  .grip:hover { opacity: 1 !important; color: var(--text); }
+  .grip:active { cursor: grabbing; }
+  .node .name { font-weight: 700; font-size: 15px; margin-bottom: 5px; }
+  .node .desc { font-size: 12px; line-height: 1.45; color: var(--muted); }
+  .kcount { display: inline-block; min-width: 20px; text-align: center; font-size: 11px; font-weight: 700; background: var(--border2); border-radius: 999px; padding: 1px 6px; margin-left: 8px; color: var(--muted); vertical-align: 1px; }
+  .node .tag {
+    display: inline-block; margin-top: 8px; font-size: 10px; font-weight: 600;
+    letter-spacing: 0.6px; text-transform: uppercase; padding: 3px 8px; border-radius: 999px;
+  }
+  .node.root { width: 320px; border-top-color: #d29922; background: #1c1a12; border-color: #4a3c18; }
+  .node.root .name { font-size: 20px; }
+  .node.root .desc { font-size: 13px; color: #c9b98a; }
+  .node.personal { border-top-color: #a371f7; }
+  .node.personal .tag { background: #2a1f45; color: #c9a7f5; }
+  .node.property { border-top-color: #3fb950; }
+  .node.property .tag { background: #122b18; color: #7ee787; }
+  .node.finance { border-top-color: #39c5cf; }
+  .node.finance .tag { background: #0f2a2d; color: #76e3ea; }
+  .node.work { border-top-color: #58a6ff; }
+  .node.work .tag { background: #10243f; color: #79c0ff; }
+  .node.family { border-top-color: #f778ba; }
+  .node.family .tag { background: #33182a; color: #ff9bce; }
+  .node.meta .tag { background: #33182a; color: #ff9bce; }
+  .node.standalone .tag { background: #21262d; color: #8b949e; }
+
+  .standalones { margin-top: 56px; }
+  .subkids { list-style: none; margin: 10px 0 0; padding: 0 0 0 14px; border-left: 2px solid #3a4a63; }
+  .subkids li { list-style: none; margin-top: 8px; }
+  .subkids .node { width: 100%; }
+  .standalones h2, .projects-view h2 { text-align: center; font-size: 20px; margin-bottom: 6px; }
+  .standalones p.sub, .projects-view p.sub { text-align: center; color: #8b949e; font-size: 14px; margin-bottom: 24px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(196px, 1fr)); gap: 12px; }
+  .grid .node { width: 100%; }
+
+  /* ---- projects list view ---- */
+  .proj-list { max-width: 860px; margin: 0 auto; }
+  .proj-row {
+    display: flex; align-items: baseline; gap: 12px;
+    padding: 10px 14px; border-bottom: 1px solid var(--border2);
+  }
+  .proj-row .pname { font-weight: 700; font-size: 14px; white-space: nowrap; }
+  .proj-row .pdesc { font-size: 13px; color: #8b949e; flex: 1; }
+  .proj-row .dot { color: #3a4a63; font-size: 12px; }
+  .proj-row .parrow { font-size: 18px; color: #8b949e; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; flex: 0 0 32px; line-height: 1; transition: transform .15s, background .15s, color .15s; user-select: none; border-radius: 8px; margin-left: -6px; }
+  .proj-row .parrow.expanded { transform: rotate(90deg); }
+  .proj-row .parrow:hover { background: var(--hover); color: var(--text); }
+  .proj-row .parrow.leaf { visibility: hidden; }
+  .status {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.4px; text-transform: uppercase;
+    padding: 3px 10px; border-radius: 999px; white-space: nowrap;
+  }
+  .st-live { background: #122b18; color: #7ee787; }
+  .st-pilot { background: #0f2a2d; color: #76e3ea; }
+  .st-prd { background: #10243f; color: #79c0ff; }
+  .st-brief { background: #2a1f45; color: #c9a7f5; }
+  .st-active { background: #122b18; color: #7ee787; }
+  .st-idea { background: #21262d; color: #8b949e; }
+  .st-new { background: #33182a; color: #ff9bce; }
+  .st-spec { background: #231a08; color: #e3b341; }
+  .st-auto { background: #122b18; color: #7ee787; }
+  .st-planned { background: #231a08; color: #e3b341; }
+  #manifest-tiles { display: flex; gap: 14px; margin: 2px auto 20px; max-width: 860px; flex-wrap: wrap; }
+  .d0 { padding-left: 14px; background: var(--panel); border-radius: 8px; margin-top: 18px; }
+  .d0 .pname { font-size: 16px; }
+  .d1 { padding-left: 34px; }
+  .d2 { padding-left: 58px; }
+  .d3 { padding-left: 82px; }
+
+  footer.legend {
+    margin-top: 48px; border-top: 1px solid #21262d; padding-top: 20px;
+    color: #8b949e; font-size: 13px; line-height: 1.7; text-align: center;
+  }
+  footer.legend b { color: #e6edf3; }
+  .swatch { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin: 0 4px 0 12px; vertical-align: baseline; }
+
+  /* light app theme */
+  html.light .tree li::before, html.light .tree li::after,
+  html.light .tree li:last-child::before, html.light .tree ul ul::before,
+  html.light .root-stub, html.light .subkids { border-color: #9aa4b2; }
+  html.light header .eyebrow { color: var(--amber-tx); border-color: #e3b341; background: #fff8e6; }
+  html.light .node.root { background: #fff8e6; border-color: #e3b341; }
+  html.light .node.root .desc { color: #7a5c1e; }
+  html.light .node.personal .tag { background: #f1e8ff; color: #7c3aed; }
+  html.light .node.property .tag { background: var(--grn-bg); color: var(--grn-tx); }
+  html.light .node.finance .tag { background: #dff5f6; color: #0e7c86; }
+  html.light .node.work .tag { background: var(--active); color: var(--accent); }
+  html.light .node.family .tag, html.light .node.meta .tag { background: #ffe9f2; color: #c2337f; }
+  html.light .node.standalone .tag { background: var(--hover); color: var(--muted); }
+  html.light header p.sub, html.light .standalones p.sub,
+  html.light .projects-view p.sub, html.light footer.legend { color: var(--muted); }
+  html.light header p.stamp { color: var(--faint); }
+  html.light footer.legend { border-top-color: var(--border); }
+  html.light footer.legend b { color: var(--text); }
+  html.light .proj-row .pdesc, html.light .proj-row .dot { color: var(--muted); }
+  html.light .d0 { border: 1px solid var(--border2); }
+</style>
+<div class="page">
+
+  <div id="token-pill" class="need" title="GitHub token status — click to manage">
+    <span id="token-pill-icon">🔑</span><span id="token-pill-text">Token needed</span>
+  </div>
+  <div id="token-pop">
+    <h4>GitHub token</h4>
+    <p>One-time setup. A classic token with <b>repo</b> scope unlocks photos, shared notes & ingest across all buddies. Stored on this device only.</p>
+    <input type="password" id="ghtok-global" placeholder="Paste token here" aria-label="GitHub token">
+    <div><button class="linkbtn" id="ghtok-global-save">Save token</button>
+    <button class="linkbtn" id="ghtok-global-clear" style="margin-left:8px">Remove</button></div>
+    <div class="saved-check" id="token-saved-check">✓ Saved — you're connected!</div>
+  </div>
+  <header>
+    <div class="eyebrow">Buddy OS &middot; macro view</div>
+    <h1>Buddies</h1>
+    <p class="sub">7 buddies &middot; one family &middot; the Coordinator is the parent of them all</p>
+    <p class="stamp">Dashboard basis &middot; the starter fleet</p>
+  </header>
+
+  <div class="tabs">
+    <button id="tab-tree" class="active" onclick="showView('tree')">Tree</button>
+    <button id="tab-projects" onclick="showView('projects')">Projects</button>
+    <button id="tab-manifest" onclick="showView('manifest')">Manifest</button>
+  </div>
+  <script>
+    function showView(which) {
+      ['tree', 'projects', 'manifest'].forEach(function(v) {
+        document.getElementById('view-' + v).classList.toggle('active', which === v);
+        document.getElementById('tab-' + v).classList.toggle('active', which === v);
+      });
+    }
+  </script>
+
+  <!-- ============ TREE VIEW ============ -->
+  <div id="view-tree" class="view active">
+    <div class="chart">
+      <div style="text-align:center">
+        <div class="node root" data-buddy="coordinator-buddy">Coordinator
+          <div class="desc">The macro view &mdash; status &amp; next action items for every buddy.<br>Every buddy inherits its tools, knowledge base &amp; dashboard behavior from here.</div>
+        </div>
+      </div>
+      <div class="root-stub"></div>
+
+      <div class="tree">
+        <ul>
+          <li><div class="node personal" data-buddy="reading-buddy">Reading Buddy
+            <div class="desc">Reading list, notes, and the book you meant to finish.</div>
+            <div class="tag">child</div>
+          </div></li>
+          <li><div class="node personal" data-buddy="fitness-buddy">Fitness Buddy
+            <div class="desc">Workouts, walks, and staying consistent.</div>
+            <div class="tag">child</div>
+          </div></li>
+          <li><div class="node personal" data-buddy="budget-buddy">Budget Buddy
+            <div class="desc">Household spending, bills, and what is due when.</div>
+            <div class="tag">child</div>
+          </div></li>
+          <li><div class="node personal" data-buddy="home-buddy">Home Buddy
+            <div class="desc">Household projects, maintenance, and the fix-it list.</div>
+            <div class="tag">child</div>
+          </div></li>
+          <li><div class="node personal" data-buddy="travel-buddy">Travel Buddy
+            <div class="desc">Trip planning, itineraries, logistics.</div>
+            <div class="tag">child</div>
+          </div></li>
+          <li><div class="node personal" data-buddy="learning-buddy">Learning Buddy
+            <div class="desc">Courses, skills, and &ldquo;what do you want to learn?&rdquo;</div>
+            <div class="tag">child</div>
+          </div></li>
+        </ul>
+      </div>
+    </div>
+
+    <section class="standalones">
+      <h2>Orphaned buddies</h2>
+      <p class="sub">No parent yet &mdash; drag one onto a buddy in the tree to give it a home.</p>
+      <div class="grid">
+        <p class="sub">None yet &mdash; every starter buddy has a home.</p>
+      </div>
+    </section>
+  </div>
+
+  <!-- ============ PROJECTS VIEW ============ -->
+  <div id="view-projects" class="view">
+    <section class="projects-view" style="margin-top:24px">
+      <h2>Projects by Buddy</h2>
+      <p class="sub">Every buddy, in hierarchy order, with its current status.</p>
+      <div class="proj-list">
+        <div class="proj-row d0" data-buddy="coordinator-buddy">Coordinator<span class="pdesc">The macro view — status &amp; next actions for every buddy</span><span class="status st-active">Active</span></div>
+        <div class="proj-row d1" data-buddy="reading-buddy">Reading Buddy<span class="pdesc">Reading list, notes, and the book you meant to finish</span><span class="status st-brief">Brief card</span></div>
+        <div class="proj-row d1" data-buddy="fitness-buddy">Fitness Buddy<span class="pdesc">Workouts, walks, and staying consistent</span><span class="status st-brief">Brief card</span></div>
+        <div class="proj-row d1" data-buddy="budget-buddy">Budget Buddy<span class="pdesc">Household spending, bills, and what is due when</span><span class="status st-brief">Brief card</span></div>
+        <div class="proj-row d1" data-buddy="home-buddy">Home Buddy<span class="pdesc">Household projects, maintenance, and the fix-it list</span><span class="status st-brief">Brief card</span></div>
+        <div class="proj-row d1" data-buddy="travel-buddy">Travel Buddy<span class="pdesc">Trip planning, itineraries, logistics</span><span class="status st-brief">Brief card</span></div>
+        <div class="proj-row d1" data-buddy="learning-buddy">Learning Buddy<span class="pdesc">Courses, skills, and what to learn next</span><span class="status st-brief">Brief card</span></div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ============ MANIFEST VIEW ============ -->
+  <div id="view-manifest" class="view">
+    <section class="projects-view" style="margin-top:24px">
+      <div id="manifest-tiles">
+        <div class="ptile" data-tile="auto" style="--tint:#2f9e44;flex:1 1 170px"><div class="ptile-label">AUTOMATIC</div><div class="ptile-num">8</div><div class="ptile-sub">The drill runs these every time</div></div>
+        <div class="ptile" data-tile="planned" style="--tint:#d97a1f;flex:1 1 170px"><div class="ptile-label">PLANNED</div><div class="ptile-num">2</div><div class="ptile-sub">Decided, not yet automatic</div></div>
+      </div>
+      <h2>New-Project Manifest</h2>
+      <p class="sub">What every new buddy automatically gets when it's born.</p>
+      <div class="proj-list">
+        <div class="proj-row d0"><span class="pname">1 · Side thread</span><span class="pdesc">The project's conversational home — all discussion, decisions, and reviews live here.</span><span class="status st-auto">Automatic</span></div>
+        <div class="proj-row d0"><span class="pname">2 · Product brief</span><span class="pdesc">Canonical description in the assistant Docs (Google Doc): the idea, the problem, revenue potential, room for growth, v1 scope, open questions.</span><span class="status st-auto">Automatic</span></div>
+        <div class="proj-row d0"><span class="pname">3 · GitHub repo</span><span class="pdesc">Private repo holding the code — and eventually the knowledge base (KNOWLEDGE.md, DECISIONS.md).</span><span class="status st-auto">Automatic</span></div>
+        <div class="proj-row d0"><span class="pname">4 · INIT summary</span><span class="pdesc">First message in the thread: the brief's executive summary (the mission statement), plus links to brief, repo, related docs, parent and children. Must include CRITICAL standing orders from AGENTS.md — especially dark mode for the buddy website.</span><span class="status st-auto">Automatic</span></div>
+        <div class="proj-row d0"><span class="pname">5 · Review ask</span><span class="pdesc">Quick-reply widget asking the owner to review the brief — looks good, edits, or defer.</span><span class="status st-auto">Automatic</span></div>
+        <div class="proj-row d0"><span class="pname">6 · Quick-links entry</span><span class="pdesc">One-tap link to the brief, appended to quick-links.md.</span><span class="status st-auto">Automatic</span></div>
+        <div class="proj-row d0"><span class="pname">7 · Memory entry</span><span class="pdesc">MEMORY.md bullet: what the project is, key links, current status.</span><span class="status st-auto">Automatic</span></div>
+        <div class="proj-row d0"><span class="pname">8 · Awaiting-reply entry</span><span class="pdesc">The brief review tracked in the registry until the owner answers.</span><span class="status st-auto">Automatic</span></div>
+        <div class="proj-row d0"><span class="pname">9 · Dashboard entry</span><span class="pdesc">The buddy appears here in the dashboard, in hierarchy order.</span><span class="status st-planned">Planned</span></div>
+        <div class="proj-row d0"><span class="pname">10 · Per-buddy home page</span><span class="pdesc">A home page for the new buddy. CRITICAL: must ship a dark mode (prefers-color-scheme or equivalent) — not light-only. See AGENTS.md / docs/standing-orders.md.</span><span class="status st-planned">Planned</span></div>
+      </div>
+    </section>
+  </div>
+
+  <footer class="legend">
+    <b>How to read this:</b>
+    <span class="swatch" style="background:#d29922"></span>Coordinator (root &middot; macro view)
+    <span class="swatch" style="background:#a371f7"></span>Personal family
+    <span class="swatch" style="background:#f778ba"></span>Family
+    <span class="swatch" style="background:#3fb950"></span>Property family
+    <span class="swatch" style="background:#39c5cf"></span>Finance family
+    <span class="swatch" style="background:#58a6ff"></span>Work
+    <br>Every buddy inherits from the Coordinator: shared tools &middot; knowledge-base inheritance &middot; dashboard rollup.
+    Children roll their knowledge up; parents push their knowledge down.
+  </footer>
+
+</div>
