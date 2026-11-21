@@ -26,6 +26,9 @@ yours, in plain text, forever readable.
 
 - **A GitHub account** (free is fine). Your repository, dashboard, and
   buddies' homepages all live there.
+- **A Google account** (a Gmail address). The system keeps its documents
+  in Google Docs and its registers and trackers in Google Sheets — that's
+  where your buddies' paperwork lives.
 - **Your Muse, open in a chat.** That's it — your Muse does the rest,
   asking you questions as it goes.
 
