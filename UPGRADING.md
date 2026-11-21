@@ -22,7 +22,20 @@ Change kinds:
 
 **What it is:** the whole starter — dashboard, homepage generators,
 registry format, seven starter buddies (Coordinator fully worked, six as
-brief cards), the first-run guide (SETUP.md), conventions, and this file.
+brief cards), and three guides: SETUP.md (the first-run guide for the
+user's Muse), START-HERE.md (the short human companion), and TESTING.md
+(the advanced tester guide). Setup presents the buddies as a pick-list —
+the Coordinator pre-selected as the anchor, the rest opt-in, unpicked
+cards kept for later. The framing is explicit throughout: the user's
+Muse is their chief of staff; the Coordinator is a project-tracking
+buddy inside the system. The companion guide carries the full
+prerequisites (a paid Muse plan — the one real cost — a GitHub account,
+a Google account; what setup creates; and a deliberate "not needed"
+list). The two human guides are also published as a small website on the
+repo's GitHub Pages (generated from the same markdown by
+`build_guides.py`, so they can't drift), and they link the author's two
+essays — "Buddies All the Way Down" and "How to Choose Your Buddies" —
+as further reading. Plus conventions, and this file.
 
 **Kind:** everything is new; there is nothing to migrate.
 
