@@ -18,6 +18,10 @@ buddy is *not* your chief of staff — it's a project-tracking buddy inside
 the staff, keeping an eye on projects and open items. Your chief of staff
 is the Muse you're chatting with; the Coordinator works for them.
 
+Want the thinking behind this? [Buddies All the Way
+Down](https://davedellaquila.substack.com/p/objects-all-the-way-down) is
+the architecture story, in the author's words.
+
 Everything lives in a GitHub repository **you own**. The buddies' pages and
 dashboard are just files in that repo, shown as web pages. Your data is
 yours, in plain text, forever readable.
@@ -71,7 +75,9 @@ Your Muse follows SETUP.md. In plain terms:
    project tracker at the center of the staff.
 4. **You pick your starting staff.** Six more buddies are offered as a
    menu — Reading, Fitness, Budget, Home, Travel, Learning. Pick the ones
-   you want now. The rest aren't deleted; their cards stay in your copy so
+   you want now. Stuck choosing? [How to Choose Your
+   Buddies](https://davedellaquila.substack.com/p/how-to-choose-your-buddies)
+   is a short guide to exactly that. The rest aren't deleted; their cards stay in your copy so
    you can install any of them later, and you can invent entirely new
    buddies whenever you like. The menu is a starting set, not a ceiling.
 5. **Pages appear.** Your Muse generates your dashboard and each buddy's

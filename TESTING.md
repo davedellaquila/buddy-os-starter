@@ -4,6 +4,18 @@
 to use it, [START-HERE.md](START-HERE.md) is your guide — read that first;
 this one goes under the hood.*
 
+## Background reading
+
+Two essays by the author, for the thinking behind the machinery:
+
+- [Buddies All the Way
+  Down](https://davedellaquila.substack.com/p/objects-all-the-way-down) —
+  the architecture: why a staff of linked buddies, and what it descends
+  from.
+- [How to Choose Your
+  Buddies](https://davedellaquila.substack.com/p/how-to-choose-your-buddies) —
+  the choosing problem the pick-list in setup is designed around.
+
 ## How the machinery actually works
 
 **The registry is the single source of truth.** `buddies.json` holds one
