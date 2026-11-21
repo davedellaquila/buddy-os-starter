@@ -9,6 +9,10 @@ Your user's copy of this repo should be **private** (the template is public;
 a working Buddy OS holds a life). If their copy is public, say so once and
 offer to walk them through making it private before anything personal goes in.
 
+The human has a companion guide, [START-HERE.md](START-HERE.md) — it tells
+them what you'll do and what you'll ask, in plain language. Keep your
+questions consistent with what it promises.
+
 ---
 
 ## Who's who (read this first)
