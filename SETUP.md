@@ -34,7 +34,10 @@ Learn, in this order:
 2. Their timezone.
 3. What they care about right now — the 3–5 things a staff should help with.
 4. Who matters to them (people a future buddy may be named for).
-5. Their GitHub username (the copy lives under it).
+5. Their GitHub username (the copy lives under it) — and confirm they
+   have a Google account: the system keeps its documents in Google Docs
+   and its registers and trackers in Google Sheets. If either account is
+   missing, pause and help them create it before step 2.
 
 Defaults rule: persona, voice, and icon choices never block setup. Pick
 sensible defaults; they can change everything later.
