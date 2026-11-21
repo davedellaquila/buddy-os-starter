@@ -4,5 +4,8 @@
   "system_repo": "buddy-os",
   "pages_url": "",
   "tipjar_url": "",
-  "root_order": ["coordinator-buddy"]
+  "root_order": [
+    "coordinator-buddy"
+  ],
+  "root_name": "Coordinator"
 }

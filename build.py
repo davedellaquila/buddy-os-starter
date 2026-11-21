@@ -33,12 +33,14 @@ PAGES_URL = INSTANCE.get("pages_url") or ("https://%s.github.io/%s/" % (GH_OWNER
 OWNER_NAME = INSTANCE.get("owner_name", "You")
 TIPJAR_URL = INSTANCE.get("tipjar_url", "")
 ROOT_ORDER_CFG = INSTANCE.get("root_order", ["coordinator-buddy"])
+ROOT_NAME = INSTANCE.get("root_name", "Coordinator")
 def apply_instance(text):
     out = (text.replace("%%GH_OWNER%%", GH_OWNER)
                .replace("%%SYS_REPO%%", SYS_REPO)
                .replace("%%PAGES_URL%%", PAGES_URL)
                .replace("%%OWNER_NAME%%", OWNER_NAME)
                .replace("%%ROOT_ID%%", ROOT_ORDER_CFG[0] if ROOT_ORDER_CFG else "coordinator-buddy")
+               .replace("%%ROOT_NAME%%", ROOT_NAME)
                .replace("%%TIPJAR_URL%%", TIPJAR_URL or "#"))
     if not TIPJAR_URL:
         out = "\n".join(l for l in out.split("\n") if 'class="sb-tipjar"' not in l)
@@ -3103,7 +3105,7 @@ body.find-open #find-card{display:block;animation:findIn .14s cubic-bezier(.32,.
 body.find-open #hp-find, body.find-open #rail-find{border-color:var(--accent);color:var(--accent);box-shadow:0 0 0 2px var(--accent)}
 /* ==== Welcome Card (Designer's welcome-card system, 2026-10-15; connected to
    the first open by the first-open crit, 2026-10-23) ====
-   In-flow at the head of Chief of Staff's homepage, first visit only per device:
+   In-flow at the head of %%ROOT_NAME%%'s homepage, first visit only per device:
    icon tile, name, why, try-this well, one Got it. */
 .welcome-card{position:relative;max-width:400px;margin:28px auto 8px;padding:36px 30px 30px;border-radius:24px;background:var(--panel);color:var(--text);text-align:center;box-shadow:0 2px 6px rgba(0,0,0,.04),0 18px 48px rgba(0,0,0,.30);animation:wc-in .45s cubic-bezier(.32,.72,0,1);box-sizing:border-box}
 html.light .welcome-card{box-shadow:0 2px 6px rgba(0,0,0,.04),0 18px 48px rgba(0,0,0,.12)}
@@ -3923,7 +3925,7 @@ const VIEW_TIPS = {
   projects: 'Projects list — every buddy in hierarchy order with status. Click a tile to filter by attention status. Click the chevron to expand/collapse sections.',
   flagged: 'Flagged — your working set: buddies you flagged from their info panel because they need your attention. Unflag from the panel or right here.',
   favorites: 'Favorites — your shortcut shelf: buddies you starred from their info panel. Open one and go straight there, no searching.',
-  orgchart: 'Org Chart — the whole staff as a classic top-down chart: Owner at the top, Chief of Staff under him, then everyone by who they report to. Click a box to open that buddy; the +/\u2212 chip folds a team away.',
+  orgchart: 'Org Chart — the whole staff as a classic top-down chart: You at the top, %%ROOT_NAME%% under you, then everyone by who they report to. Click a box to open that buddy; the +/\u2212 chip folds a team away.',
   plans: 'Business Plans — real-world ventures as cards. Click a status tile to filter. Each card links to its mission statement and related buddies.',
   manifest: 'New-Project Manifest — the checklist every new buddy gets. Click AUTOMATIC or PLANNED tiles to filter the steps.',
   project: 'Homepage — loads the selected buddy homepage full-bleed in the main view. Clicking a buddy with a homepage swaps it; clicking one without keeps the current page.',
@@ -4043,7 +4045,7 @@ function recordRecent(id){
     S.recentBuddies = [id].concat(S.recentBuddies.filter(x => x !== id)).slice(0, 200);
     /* Most-used leaderboard (Owner 2026-11-06): count the arrival — the
        same "visit" Recents records — in S.buddyOpens, for the chart on
-       Chief of Staff's homepage. Per-device (it lives in this device's store),
+       %%ROOT_NAME%%'s homepage. Per-device (it lives in this device's store),
        dashboard visits only; a re-select of the buddy already on top
        is not a new visit and does not count. Counting starts with the
        build that ships this: no backfilled history, by design. */
@@ -4413,8 +4415,8 @@ function renderMarkView(kind){
 /* Org Chart view (Owner, 2026-10-21, Job 11): the classic corporate
    chart \u2014 top-down boxes with connector lines, from registry
    parent data. Owner has no registry entry, so the root box is
-   synthetic; Chief of Staff sits under him, and every parentless or orphaned
-   buddy attaches under Chief of Staff (all staff report up through the chief
+   synthetic; %%ROOT_NAME%% sits under him, and every parentless or orphaned
+   buddy attaches under %%ROOT_NAME%% (all staff report up through the chief
    of staff). Subtrees collapse via S.ocClosed (persisted by save()).
    Distinct from the Atlas "Tree" lens \u2014 this is the org chart. */
 function toggleOcTeam(id){
@@ -4460,7 +4462,7 @@ function renderOrgChart(){
     + '<div class="oc-name">Owner</div><div class="oc-role">The boss</div></div>'
     + '<ul class="oc-kids">' + node(ROOT_ID) + '</ul></li>';
   el.innerHTML = '<div class="oc-head"><h2>\U0001F3E2 Org Chart <span class="attn-count">(' + (ocScope ? ocScope.size : BUDDIES.length) + ')</span></h2>'
-    + '<p class="sub">The whole staff, top-down by who reports to whom \u2014 everyone ultimately reports to Owner, through Chief of Staff. Click a box to open that buddy; the +/\u2212 chip folds a team away. Zoom with the cluster, Shift+scroll, a pinch, or the + / \u2212 / 0 keys; drag the background to pan.</p>'
+    + '<p class="sub">The whole staff, top-down by who reports to whom \u2014 everyone ultimately reports to you, through %%ROOT_NAME%%. Click a box to open that buddy; the +/\u2212 chip folds a team away. Zoom with the cluster, Shift+scroll, a pinch, or the + / \u2212 / 0 keys; drag the background to pan.</p>'
     + '<p class="sub oc-sub-short">Tap a box to open it \u00b7 drag to pan \u00b7 pinch to zoom.</p></div>'
     + '<div class="oc-vp"><div class="oc-zoombar" role="group" aria-label="Org chart zoom controls">'
     + '<span class="oc-zgrip" id="oc-zgrip" title="Drag to move the zoom controls — double-click to reset" aria-hidden="true"></span>'
@@ -4859,7 +4861,7 @@ function renderNav(){
     const kidIds = sortSiblingsByOrder(kids.map(k => k.id), id);
     const hasKids = kids.length > 0;
     const collapsed = id !== ROOT_ID && hasKids && !words.length && !!S.navCollapsed[id];
-    /* Owner 2026-10-31: the root (Chief of Staff) is the ONLY non-collapsible
+    /* Owner 2026-10-31: the root (%%ROOT_NAME%%) is the ONLY non-collapsible
        node — no chevron, ever — and its subtree re-anchors one chevron
        slot (24px) further left into the dead space that slot reserved:
        deeper rows use (depth-1)*16 and the root uses 16px — its old 8px
@@ -4869,7 +4871,7 @@ function renderNav(){
        math.
        Owner 2026-11-01: Family Buddy's tree re-anchors too — position
        only; its root chevron stays live (the non-collapsible exception
-       is Chief of Staff's alone). A live chevron can't vacate its slot, so the
+       is %%ROOT_NAME%%'s alone). A live chevron can't vacate its slot, so the
        reclaimable space in that tree is the base pad: depth-0 pad 0
        (chevron tight at the panel edge), deeper rows depth*16 — a
        uniform 8px left shift with the depth steps exact. (The full
@@ -6311,8 +6313,8 @@ function toggleRailViewPop(){
    Picking a row opens that buddy's panel. */
 /* Universal Dump (Owner, 2026-10-30): a disc on the collapsed rail,
    below the current-view icon, opening a capture box that routes to the
-   TOP LEVEL - Chief of Staff's ingest (%%SYS_REPO%%/docs/ingest.md, the same
-   file Chief of Staff's own homepage dump box and the dashboard's attention
+   TOP LEVEL - %%ROOT_NAME%%'s ingest (%%SYS_REPO%%/docs/ingest.md, the same
+   file %%ROOT_NAME%%'s own homepage dump box and the dashboard's attention
    actions land in) - never to the currently selected buddy or view.
    Same token-gated write path as the fleet's dump boxes: with a token
    the entry appends through ghPutFile; without one (or on any failure)
@@ -6328,7 +6330,7 @@ function dumpQueueAdd(rec){ const q = dumpQueueRead(); q.push(rec); if (!dumpQue
    anything bigger is refused at pick time with the reason, never
    silently. Uploaded files land in docs/ingest-files/<one folder per
    dump>/ beside the ingest log, and the entry lists each with its
-   GitHub link so Chief of Staff triages text and files together. */
+   GitHub link so %%ROOT_NAME%% triages text and files together. */
 const DUMP_FILE_MAX = 1024 * 1024;
 function fmtDumpSize(n){ return n >= 1048576 ? (n / 1048576).toFixed(1) + ' MB' : Math.max(1, Math.round(n / 1024)) + ' KB'; }
 function dumpFileSlug(name){ return String(name || 'file').replace(/[^A-Za-z0-9._-]+/g, '-').replace(/^-+|-+$/g, '') || 'file'; }
@@ -6339,7 +6341,7 @@ async function dumpUploadFiles(rec){
   const folder = 'docs/ingest-files/' + dumpFolder(rec.t) + '/';
   for (const f of rec.files) {
     const path = folder + dumpFileSlug(f.name);
-    await ghPutFile(DUMP_REPO, path, f.b64, 'Dashboard universal dump file -> Chief of Staff ingest');
+    await ghPutFile(DUMP_REPO, path, f.b64, 'Dashboard universal dump file -> %%ROOT_NAME%% ingest');
     paths.push(path);
   }
   return paths;
@@ -6424,7 +6426,7 @@ async function dumpFlush(entries){
   }
   const cur = await ghGetFile(DUMP_REPO, DUMP_PATH);
   const base = cur || ('# Ingest log — Buddy OS' + NL + NL);
-  await ghPutFile(DUMP_REPO, DUMP_PATH, b64encode(base + parts.join('')), 'Dashboard universal dump -> Chief of Staff ingest');
+  await ghPutFile(DUMP_REPO, DUMP_PATH, b64encode(base + parts.join('')), 'Dashboard universal dump -> %%ROOT_NAME%% ingest');
 }
 async function flushDumpQueue(){
   if (!ghToken()) return false;
@@ -6437,8 +6439,8 @@ async function sendDump(){
   if (!ta || !st || !btn || !pop) return;
   const text = ta.value.trim();
   const pending = (pop._files || []).slice();
-  if (!text && !pending.length) { st.textContent = 'Type something or attach a file first — even a fragment. Chief of Staff will route it.'; return; }
-  btn.disabled = true; st.textContent = 'Dumping to Chief of Staff…';
+  if (!text && !pending.length) { st.textContent = 'Type something or attach a file first — even a fragment. %%ROOT_NAME%% will route it.'; return; }
+  btn.disabled = true; st.textContent = 'Dumping to %%ROOT_NAME%%…';
   /* Serialize the attachments up front: the queue stores base64, so a
      queued dump carries its files with it. */
   const files = [];
@@ -6455,7 +6457,7 @@ async function sendDump(){
     try { n = dumpQueueAdd(rec); }
     catch (err) { st.textContent = '⚠ That is more than this device can hold in the queue — nothing was saved. Add a GitHub token in Settings and dump it straight through.'; btn.disabled = false; return; }
     clearCard();
-    st.textContent = '✓ Saved on this device (' + n + ' waiting) — add a GitHub token in Settings and dumps sync to Chief of Staff. Nothing is lost.';
+    st.textContent = '✓ Saved on this device (' + n + ' waiting) — add a GitHub token in Settings and dumps sync to %%ROOT_NAME%%. Nothing is lost.';
     btn.disabled = false;
     return;
   }
@@ -6464,7 +6466,7 @@ async function sendDump(){
     await dumpFlush(backlog.concat([rec]));
     dumpQueueWrite([]);
     clearCard();
-    st.textContent = '✓ With Chief of Staff now' + (files.length ? ' (' + files.length + (files.length === 1 ? ' file' : ' files') + ' attached)' : '') + (backlog.length ? ' — plus ' + backlog.length + ' earlier ' + (backlog.length === 1 ? 'dump' : 'dumps') + ' synced.' : '.');
+    st.textContent = '✓ With %%ROOT_NAME%% now' + (files.length ? ' (' + files.length + (files.length === 1 ? ' file' : ' files') + ' attached)' : '') + (backlog.length ? ' — plus ' + backlog.length + ' earlier ' + (backlog.length === 1 ? 'dump' : 'dumps') + ' synced.' : '.');
   } catch (err) {
     let n = 0, held = true;
     try { n = dumpQueueAdd(rec); } catch (e2) { held = false; }
@@ -6503,11 +6505,11 @@ function toggleDumpPop(){
   if (document.getElementById('dump-pop')) { closeDumpPop(); return; }
   closeRecentsPop(); closeRailViewPop();
   const btn = document.getElementById('rail-dump'); if (!btn) return;
-  const p = document.createElement('div'); p.id = 'dump-pop'; p.setAttribute('role', 'dialog'); p.setAttribute('aria-label', 'Dump to Chief of Staff');
-  const head = document.createElement('div'); head.className = 'dump-head'; head.textContent = '📥 Dump to Chief of Staff';
+  const p = document.createElement('div'); p.id = 'dump-pop'; p.setAttribute('role', 'dialog'); p.setAttribute('aria-label', 'Dump to %%ROOT_NAME%%');
+  const head = document.createElement('div'); head.className = 'dump-head'; head.textContent = '📥 Dump to %%ROOT_NAME%%';
   const sub = document.createElement('p'); sub.className = 'dump-sub';
-  sub.textContent = "Anything, from anywhere — it lands at the top level, in Chief of Staff's ingest, and gets routed from there. Not tied to the buddy or view you're looking at.";
-  const ta = document.createElement('textarea'); ta.id = 'dump-text'; ta.placeholder = 'Dump it raw…'; ta.setAttribute('aria-label', 'Text to dump to Chief of Staff');
+  sub.textContent = "Anything, from anywhere — it lands at the top level, in %%ROOT_NAME%%'s ingest, and gets routed from there. Not tied to the buddy or view you're looking at.";
+  const ta = document.createElement('textarea'); ta.id = 'dump-text'; ta.placeholder = 'Dump it raw…'; ta.setAttribute('aria-label', 'Text to dump to %%ROOT_NAME%%');
   p._files = [];
   const arow = document.createElement('div'); arow.className = 'dump-attachrow';
   const abtn = document.createElement('button'); abtn.type = 'button'; abtn.className = 'dump-attach'; abtn.textContent = '📎 Attach files';
@@ -7259,7 +7261,7 @@ function initHomepageDumpbox(root, b){
 
 /* ==== Welcome Card (Designer's welcome-card system, 2026-10-15; connected to
    the first open by the first-open crit, 2026-10-23) ====
-   In-flow at the head of Chief of Staff's homepage, on the first open only.
+   In-flow at the head of %%ROOT_NAME%%'s homepage, on the first open only.
    Dismissal persists per device in its own localStorage key, independent
    of the dashboard state; Got it and the x both dismiss permanently. */
 const WELCOME_KEY = 'buddyWelcome.system';
@@ -7275,7 +7277,7 @@ function buildWelcomeCard(){
   card.innerHTML = '<button type="button" class="wc-x" aria-label="Dismiss welcome">\u00d7</button>'
     + '<div class="wc-icon" aria-hidden="true">' + escHtml(buddyDisplayIcon(b) || b.icon || '🚀') + '</div>'
     + '<h2 class="wc-name">Welcome to the Buddy System</h2>'
-    + '<p class="wc-why">' + n + ' buddies \u2014 your staff, family, and projects \u2014 organized in one place. Chief of Staff runs the front desk.</p>'
+    + '<p class="wc-why">' + n + ' buddies \u2014 your staff, family, and projects \u2014 organized in one place. %%ROOT_NAME%% runs the front desk.</p>'
     + '<div class="wc-try"><span aria-hidden="true">\u2728</span> <b>Try this:</b> The strip holds where you’ve been. The grid opens everyone. Find (bottom) leaps to anyone by name.</div>'
     + '<button type="button" class="wc-got">Got it</button>';
   const dismiss = () => {
@@ -8940,7 +8942,7 @@ function moveBuddy(src, target){
 /* FAMKINDS retired 2026-10-11: the org chart now shows every direct report of the
    root side by side; only truly parentless buddies go to the orphan section. */
 function nodeTag(b, depth){
-  if (depth === 0) return 'root'; // Owner 2026-10-18: Chief of Staff's tile labels him as the root
+  if (depth === 0) return 'root'; // Owner 2026-10-18: %%ROOT_NAME%%'s tile labels him as the root
   if (depth === 1) {
     if (b.kind === 'work') return 'direct report';
     if (b.kind === 'meta') return 'meta';
@@ -9178,7 +9180,7 @@ function renderOrgTree(){
   const kids = visibleKids(ROOT_ID);
   let chartHtml;
   if (chartType === 'org') {
-    // Owner 2026-10-18: Chief of Staff renders as the root tile — the staff hangs under him.
+    // Owner 2026-10-18: %%ROOT_NAME%% renders as the root tile — the staff hangs under him.
     // Horizontal orientation (Owner, 2026-10-13): generations flow left to right.
     const horiz = (S.orgOrientation || 'vertical') === 'horizontal';
     chartHtml = '<div class="chart"><div class="tree' + (horiz ? ' tree-horizontal' : '') + '"><ul>'
@@ -9480,7 +9482,7 @@ function chartSwitcherHtml(){
 }
 /* ============ Default View styles (Owner 2026-10-15) ============
    The auto-generated buddy homepage ("show everything") rendered in four
-   visual languages. Hierarchy-aware: root (Chief of Staff) = system rollups,
+   visual languages. Hierarchy-aware: root (%%ROOT_NAME%%) = system rollups,
    parents = children summaries, leaves = own data. Style persists per
    device in S.dvStyle (Bento default), picker mirrors the Atlas lens
    picker: a quiet pill opening a flyout with wireframe thumbnails. */
@@ -9626,7 +9628,7 @@ function dvLedgerHtml(b){
   let h = '<div class="dv-ledger">';
   h += '<div class="dv-leyebrow">THE BUDDY SYSTEM</div>';
   h += '<h1>' + (isRoot ? 'The State of<br>the System' : escHtml(dispName(b))) + '</h1>';
-  h += '<div class="dv-ldateline">' + escHtml(today) + ' · ' + (isRoot ? "Chief of Staff's overview" : escHtml(dispName(b))) + '</div>';
+  h += '<div class="dv-ldateline">' + escHtml(today) + ' · ' + (isRoot ? "%%ROOT_NAME%%'s overview" : escHtml(dispName(b))) + '</div>';
   h += '<hr class="dv-lrule">';
   const total = isRoot ? Object.keys(byId).length : dvDescCount(b.id) + 1;
   h += '<div class="dv-lpull"><div class="dv-lbig">' + total + '</div><div class="dv-lcap">' + (isRoot ? 'BUDDIES · ONE FAMILY' : 'IN THIS CORNER') + '</div></div>';
@@ -12466,7 +12468,7 @@ async function flushNbQueue(){
       S.nbQueue = (S.nbQueue || []).filter(q => q !== item && !(q && q.req && q.req.id === item.req.id && q.req.path === item.req.path));
       save();
       addPendingBuddy(item.req.body, item.emoji);
-      toast('✓ Queued request sent \u2014 "' + item.req.name + '" is in the inbox and Chief of Staff will run the setup.');
+      toast('✓ Queued request sent \u2014 "' + item.req.name + '" is in the inbox and Your Muse will run the setup.');
     } catch (e) {
       item.reason = nbPlainReason(e, !!ghToken());
       save();
@@ -12495,7 +12497,7 @@ function openNewBuddyRequest(prefillName){
     + '<div class="nb-grab"></div>'
     + '<h2>New buddy</h2>'
     + '<div class="nb-body">'
-    + '<p class="ab-sub">Tell Chief of Staff what you want — the buddy lands in your list right away, and Chief of Staff runs the full onboarding (repo, mission doc, side chat, homepage) behind it.</p>'
+    + '<p class="ab-sub">Tell your Muse what you want — the buddy lands in your list right away, and your Muse runs the full onboarding (repo, mission doc, side chat, homepage) behind it.</p>'
     + '<label>Name</label><input type="text" id="nb-name" placeholder="e.g. Car Buddy" autocomplete="off">'
     + '<label>Place in tree</label><div class="nb-place" role="tablist" aria-label="Where in the tree">'
     + '<button type="button" data-place="child" class="sel" role="tab" aria-selected="true">Child</button>'
@@ -12622,7 +12624,7 @@ function openNewBuddyRequest(prefillName){
          queues instead (below) and the placeholder lands when the queued
          write flushes. The placeholder carries the same id the drill will use. */
       const newId = addPendingBuddy(req.body, personaEmoji);
-      toast('✓ Saved \u2014 "' + req.name + '" request is in the inbox (docs/inbox) and Chief of Staff will run the full setup.');
+      toast('✓ Saved \u2014 "' + req.name + '" request is in the inbox (docs/inbox) and Your Muse will run the full setup.');
       /* Owner 2026-10-20: after creating a buddy, it is selected and
          displayed in the main view — you land on what you just made. */
       if (newId) openBuddy(newId);
@@ -12726,7 +12728,7 @@ async function createBuddyFromDialog(name, icon, kind, parentId, errEl, createBt
         if (reparented) reparented.parent = nid;
       }
       await ghPutFile('%%SYS_REPO%%', 'buddies.json', b64encode(JSON.stringify(data, null, 1)), 'Add buddy ' + nid + ' (from dashboard info panel)');
-      toast('Buddy created — Chief of Staff will run the full onboarding.');
+      toast('Buddy created — your Muse will run the full onboarding.');
     } catch (we) {
       // Roll back the local stub
       const ix = BUDDIES.indexOf(entry); if (ix >= 0) BUDDIES.splice(ix, 1);
@@ -14503,7 +14505,7 @@ function phoneBuddyLanding(id){
   show('view:project', false);
 }
 /* First open (Designer's first-open crit, 2026-10-23): a device with no stored
-   state lands on Chief of Staff's homepage — the chief of staff is the front door —
+   state lands on %%ROOT_NAME%%'s homepage — the chief of staff is the front door —
    with the Welcome Card at its head (see buildWelcomeCard). Deliberately
    NOT selectBuddy(): no visit is recorded, so the strip keeps its roots
    seed and recency stays Owner's alone. The pre-app boot script sets
@@ -15590,7 +15592,7 @@ function initSearch(){
       const words = q.toLowerCase().trim().split(/\s+/).filter(Boolean);
       if (!words.length) return [];
       return BUDDIES.filter(b => {
-        // Owner 2026-10-18: Chief of Staff (the root) is searchable too — no exclusion.
+        // Owner 2026-10-18: %%ROOT_NAME%% (the root) is searchable too — no exclusion.
         const hay = (dispName(b) + ' ' + (b.name || '') + ' ' + (b.tagline || '') + ' ' + effAka(b).join(' ')).toLowerCase();
         return words.every(w => hay.includes(w));
       }).slice(0, 8);
@@ -16546,7 +16548,7 @@ flushDumpQueue();
   <div class="nav-sec" id="plans-sec"><h3 style="cursor:pointer" id="plans-toggle"><span id="plans-arrow">\u203a</span> Business Plans</h3><div id="plan-nav"></div></div>
   </div>
   <div class="sb-tipjar"><a href="%%TIPJAR_URL%%" target="_blank" rel="noopener" title="Support the buddy system"><span class="jar">\U0001FAD9</span> <span class="tiptext">Tip the jar</span></a></div>
-  <div id="rail-mid"><button type="button" id="rail-recents" title="Recent buddies" aria-label="Recent buddies"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 8.5A9 9 0 1 1 3.2 13.6"/><path d="M3.2 3.8v4.8h4.8"/><path d="M12 7.5V12l3 2"/></svg></button><div class="rail-div" aria-hidden="true"></div><button type="button" id="rail-curview" title="Current view" aria-label="Current view - tap to switch views"></button><button type="button" id="rail-dump" title="Dump to Chief of Staff - a universal inbox, from anywhere" aria-label="Dump to Chief of Staff"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v7"/><path d="m8.2 6.8 3.8 3.8 3.8-3.8"/><path d="M3.5 13.5h4l1.8 2.7h5.4l1.8-2.7h4"/><path d="M3.5 13.5V19a1.8 1.8 0 0 0 1.8 1.8h13.4a1.8 1.8 0 0 0 1.8-1.8v-5.5"/></svg></button><div id="rail-hpnav" role="group" aria-label="Previous and next buddy homepage"><button type="button" id="rail-find" title="Find a buddy" aria-label="Find a buddy"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M15.5 15.5L21 21" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></button><button type="button" id="rail-prev" title="Previous homepage" aria-label="Previous buddy homepage"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M5.5 14.5L12 8l6.5 6.5" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button type="button" id="rail-next" title="Next homepage" aria-label="Next buddy homepage"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M5.5 9.5L12 16l6.5-6.5" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></div>
+  <div id="rail-mid"><button type="button" id="rail-recents" title="Recent buddies" aria-label="Recent buddies"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 8.5A9 9 0 1 1 3.2 13.6"/><path d="M3.2 3.8v4.8h4.8"/><path d="M12 7.5V12l3 2"/></svg></button><div class="rail-div" aria-hidden="true"></div><button type="button" id="rail-curview" title="Current view" aria-label="Current view - tap to switch views"></button><button type="button" id="rail-dump" title="Dump to %%ROOT_NAME%% - a universal inbox, from anywhere" aria-label="Dump to %%ROOT_NAME%%"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v7"/><path d="m8.2 6.8 3.8 3.8 3.8-3.8"/><path d="M3.5 13.5h4l1.8 2.7h5.4l1.8-2.7h4"/><path d="M3.5 13.5V19a1.8 1.8 0 0 0 1.8 1.8h13.4a1.8 1.8 0 0 0 1.8-1.8v-5.5"/></svg></button><div id="rail-hpnav" role="group" aria-label="Previous and next buddy homepage"><button type="button" id="rail-find" title="Find a buddy" aria-label="Find a buddy"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M15.5 15.5L21 21" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></button><button type="button" id="rail-prev" title="Previous homepage" aria-label="Previous buddy homepage"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M5.5 14.5L12 8l6.5 6.5" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button type="button" id="rail-next" title="Next homepage" aria-label="Next buddy homepage"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M5.5 9.5L12 16l6.5-6.5" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></div>
 </aside>
 <div id="sb-resize" title="Drag left or right to resize the sidebar. Double-click to close."></div>
 <button type="button" id="sb-tab" title="Open sidebar" aria-label="Open sidebar"></button>

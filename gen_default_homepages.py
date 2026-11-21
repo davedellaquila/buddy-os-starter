@@ -49,12 +49,14 @@ PAGES_URL = INSTANCE.get("pages_url") or ("https://%s.github.io/%s/" % (GH_OWNER
 OWNER_NAME = INSTANCE.get("owner_name", "You")
 TIPJAR_URL = INSTANCE.get("tipjar_url", "")
 ROOT_ORDER_CFG = INSTANCE.get("root_order", ["coordinator-buddy"])
+ROOT_NAME = INSTANCE.get("root_name", "Coordinator")
 def apply_instance(text):
     out = (text.replace("%%GH_OWNER%%", GH_OWNER)
                .replace("%%SYS_REPO%%", SYS_REPO)
                .replace("%%PAGES_URL%%", PAGES_URL)
                .replace("%%OWNER_NAME%%", OWNER_NAME)
                .replace("%%ROOT_ID%%", ROOT_ORDER_CFG[0] if ROOT_ORDER_CFG else "coordinator-buddy")
+               .replace("%%ROOT_NAME%%", ROOT_NAME)
                .replace("%%TIPJAR_URL%%", TIPJAR_URL or "#"))
     return out
 # --- end instance configuration ---------------------------------------------
@@ -422,7 +424,7 @@ def family_nav(buddies, b):
         parts.append('<nav data-buddy-crumb style="margin-bottom:14px;font-size:14px;">%s</nav>' % links)
     elif bid != 'astro':
         parts.append('<nav data-buddy-crumb style="margin-bottom:14px;font-size:14px;">'
-                     '<a href="%sastro/" style="color:var(--muted);text-decoration:none;">← Chief of Staff</a></nav>' % BASE_URL)
+                     '<a href="%s%%ROOT_ID%%/" style="color:var(--muted);text-decoration:none;">← %%ROOT_NAME%%</a></nav>' % BASE_URL)
     kids = sorted(
         (x for x in buddies.values() if bid in eff_parents(buddies, x)),
         key=lambda x: x.get('name', ''))

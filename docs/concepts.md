@@ -8,9 +8,14 @@ keep knowledge, they own outcomes. *Less app, more buddy.*
 parent, its status, its open attention items. If it isn't in the registry,
 it isn't on the staff. See `registry-format.md`.
 
-**The Coordinator** is the buddy at the root of the tree — your chief of
-staff. It holds the macro view (every buddy's status and next actions),
-tracks open items across the staff, and routes work to the buddy who owns it.
+**Your Muse is your chief of staff** — the main interface you talk to.
+That role is never installed; it is who runs your setup and your days.
+
+**The Coordinator** is a buddy *inside* the system, one level down: the
+project-tracking buddy at the root of the tree. It holds the macro view
+(every buddy's status and next actions), tracks projects and open items
+across the staff, and routes work to the buddy who owns it. It is staff —
+not the front door, and not your chief of staff.
 
 **System vs instance.** The *system* is the machinery in this starter:
 dashboard, generators, formats, conventions. The *instance* is yours: your

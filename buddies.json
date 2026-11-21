@@ -7,7 +7,7 @@
       "kind": "system",
       "type": "project",
       "parent": null,
-      "brief": "Your chief of staff: keeps the whole staff's status in view, tracks open items, and makes sure nothing quietly drops.",
+      "brief": "The project-tracking buddy at the root of the tree: keeps every buddy's status in view, tracks projects and open items, and makes sure nothing quietly drops.",
       "homepage": "coordinator-buddy/",
       "repo": "coordinator-buddy",
       "status": "active",

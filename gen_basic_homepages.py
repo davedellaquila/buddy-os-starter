@@ -41,12 +41,14 @@ PAGES_URL = INSTANCE.get("pages_url") or ("https://%s.github.io/%s/" % (GH_OWNER
 OWNER_NAME = INSTANCE.get("owner_name", "You")
 TIPJAR_URL = INSTANCE.get("tipjar_url", "")
 ROOT_ORDER_CFG = INSTANCE.get("root_order", ["coordinator-buddy"])
+ROOT_NAME = INSTANCE.get("root_name", "Coordinator")
 def apply_instance(text):
     out = (text.replace("%%GH_OWNER%%", GH_OWNER)
                .replace("%%SYS_REPO%%", SYS_REPO)
                .replace("%%PAGES_URL%%", PAGES_URL)
                .replace("%%OWNER_NAME%%", OWNER_NAME)
                .replace("%%ROOT_ID%%", ROOT_ORDER_CFG[0] if ROOT_ORDER_CFG else "coordinator-buddy")
+               .replace("%%ROOT_NAME%%", ROOT_NAME)
                .replace("%%TIPJAR_URL%%", TIPJAR_URL or "#"))
     return out
 # --- end instance configuration ---------------------------------------------
@@ -112,9 +114,9 @@ def family_nav(b):
             for p in parents)
         parts.append('<nav data-buddy-crumb style="%s">%s</nav>' % (CRUMB_STYLE, links))
     elif bid != 'astro':
-        # Top-level buddies link to Chief of Staff (root)
+        # Top-level buddies link to the root buddy
         parts.append('<nav data-buddy-crumb style="%s">'
-                     '<a href="%sastro/" style="color:inherit;opacity:.65;text-decoration:none;">← Chief of Staff</a>'
+                     '<a href="%s%%ROOT_ID%%/" style="color:inherit;opacity:.65;text-decoration:none;">← %%ROOT_NAME%%</a>'
                      '</nav>' % (CRUMB_STYLE, BASE_URL))
     kids = sorted(
         (x for x in d['buddies'] if bid in eff_parents(x)),
@@ -1479,7 +1481,7 @@ def build_gallery(b):
 # --- Managed Files section (Owner's homepage standard, 2026-11-18) ---------
 # Every homepage lists the files its buddy manages: registry-registered
 # records first (they can live outside the repo -- goal files and records a
-# buddy or Chief of Staff registers in the buddies.json `files` list), then the
+# buddy or the root buddy registers in the buddies.json `files` list), then the
 # documents in the buddy's own repo, inventoried from the local clone's
 # tracked files. The section always renders; a buddy with nothing yet gets
 # "No files yet." Keep in step with gen_default_homepages.py.

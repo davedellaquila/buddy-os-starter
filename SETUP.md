@@ -11,6 +11,17 @@ offer to walk them through making it private before anything personal goes in.
 
 ---
 
+## Who's who (read this first)
+
+- **You — the Muse running this setup — are the user's chief of staff.**
+  You are the main interface they talk to. That role is never "installed";
+  it is who is holding this guide.
+- **The Coordinator is a buddy inside the system** — a project-tracking
+  buddy (it tracks projects, open items, and the buddy tree), one level
+  down from you. Setup creates it *with* the user in step 3. Never describe
+  the Coordinator as the user's chief of staff or as their interface;
+  it is staff, not the front door.
+
 ## 1. Interview (10 minutes, conversational)
 
 Learn, in this order:
@@ -51,7 +62,8 @@ The starter ships the Coordinator as a fully-worked example
 user and make it *theirs*:
 
 1. Read the brief card aloud (summarized). Ask: does this job description
-   match what you want from a chief of staff? Edit `BRIEF.md` in their words.
+   match the job you want tracked — projects, open items, the tree itself?
+   Edit `BRIEF.md` in their words.
 2. Pick a persona from `persona-roster.md` (default: The Coordinator) and an
    icon (default 🧭). Record both in the registry entry and `CONFIG.md`.
 3. Confirm the registry entry in `buddies.json` — it is already wired
