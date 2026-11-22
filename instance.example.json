@@ -7,5 +7,6 @@
   "root_order": [
     "coordinator-buddy"
   ],
-  "root_name": "Coordinator"
+  "root_name": "Coordinator",
+  "starter_version": "1.1.0"
 }

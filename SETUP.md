@@ -53,9 +53,16 @@ Create `instance.json` beside `build.py` (start from `instance.example.json`):
   "system_repo": "<the name of THIS repo in their account>",
   "pages_url": "",
   "tipjar_url": "",
-  "root_order": ["coordinator-buddy"]
+  "root_order": ["coordinator-buddy"],
+  "root_name": "Coordinator",
+  "starter_version": "<the starter release this copy came from>"
 }
 ```
+
+`starter_version` records which starter release this copy is running —
+it is how a future update knows where this copy stands. Leave it exactly
+as the template shipped it; [UPDATE.md](UPDATE.md) maintains it from
+here.
 
 `pages_url` may stay empty — the build derives
 `https://<github_owner>.github.io/<system_repo>/`. Set `tipjar_url` only if

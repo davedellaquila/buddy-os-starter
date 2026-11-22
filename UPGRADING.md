@@ -18,6 +18,27 @@ Change kinds:
 
 ---
 
+## v1.1.0 — the one-ask update path (2026-11-21)
+
+**What it is:** updates become a conversation. `instance.json` gains a
+`starter_version` stamp recording which starter release a copy is
+running, and a new UPDATE.md — written for the user's Muse, the way
+SETUP.md is — defines the whole flow: the user says *"check for Buddy OS
+updates"* and their Muse checks the latest release, reads these notes,
+checkpoints the copy in git, applies the system files around the user's
+data (user-owned files are never overwritten; conventions are merged,
+not replaced), regenerates, verifies, and reports what changed and
+anything that conflicted.
+
+**Kind:** Machinery (the stamp + UPDATE.md) — no schema migration; the
+stamp field is additive and 1.0.0 copies are treated as 1.0.0 until
+their first update adds it.
+
+**Adopting:** if your copy predates this release, your Muse can adopt
+it by hand this once: add `"starter_version": "1.1.0"` to
+`instance.json` and copy UPDATE.md in. Every later release then arrives
+through UPDATE.md itself.
+
 ## v1.0.0 — the first release (2026-11-21)
 
 **What it is:** the whole starter — dashboard, homepage generators,

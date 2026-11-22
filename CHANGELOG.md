@@ -1,5 +1,14 @@
 # Changelog — Buddy OS Starter
 
+## 1.1.0 — 2026-11-21
+
+- The one-ask update path: `instance.json` gains a `starter_version`
+  stamp, and UPDATE.md (written for the user's Muse) defines the
+  update flow — check the latest release, read UPGRADING, checkpoint,
+  apply system files around user data, regenerate, verify, report.
+- START-HERE's day-two list gains the one ask: "check for Buddy OS
+  updates."
+
 ## 1.0.0 — 2026-11-21
 
 - First release: the dashboard (`build.py`), homepage generators (basic +

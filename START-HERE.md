@@ -129,6 +129,9 @@ system in one gesture: a page that's also a tool.
 
 - Ask your Muse to install another buddy from the cards, or invent one
   of your own ("I want a buddy who tracks my garden").
+- Say **"check for Buddy OS updates"** now and then. Your Muse fetches
+  the latest starter release, applies it around your data, and tells you
+  what changed — that's the whole flow.
 - Anything you'd otherwise lose — a link, a half-thought, a receipt — can
   be *dumped* into a buddy's inbox from its homepage; your Muse files it.
 - Once a week, ask your chief of staff: *"What's open, what's stuck, what
