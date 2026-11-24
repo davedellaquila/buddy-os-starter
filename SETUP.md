@@ -276,7 +276,9 @@ item as **Later** from its homepage, and show them the stamp it wrote into
   entry, homepage. First task is always the homepage.
 - Read `AGENTS.md` together and edit one line so it's theirs.
 - Set a standing rhythm: a morning glance at the dashboard's open items.
-- When a starter release lands, `UPGRADING.md` explains what changed and
-  how to adopt it — you (their Muse) apply it, keeping their data.
+- Updates are the staff's job: once a week, unprompted, check for Buddy OS
+  updates (the flow is `UPDATE.md`) and, when a release has landed,
+  summarize what changed and adopt it on their go — `UPGRADING.md`
+  explains each release, and you apply it keeping their data.
 
 Welcome to the staff. Less app, more buddy.

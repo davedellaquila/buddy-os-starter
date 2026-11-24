@@ -6,6 +6,11 @@ whether they're current, or what's new), you do the rest — check, apply,
 verify, report. Never make them run a command or read a diff unless a
 decision genuinely needs them.
 
+Your copy's conventions (AGENTS.md) also ask you to run this check
+**weekly on your own initiative** — don't wait to be asked. When a newer
+release exists, surface what's new in plain terms and apply it on the
+user's go.
+
 ## 1. Find the copy's current version
 
 Read `starter_version` in `instance.json` (beside `build.py`). If the

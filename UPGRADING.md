@@ -18,6 +18,41 @@ Change kinds:
 
 ---
 
+## v1.2.0 — first-tester fixes, and staffs that check for themselves (2026-11-24)
+
+**What it is:** everything learned from the first real tester run, plus a
+standing habit. Three parts:
+
+- **Homepage & dashboard machinery (fixes).** (1) In standalone
+  (saved-app) mode the dashboard now clears the window manager's
+  stoplight controls — the crumb bar indents and the menu button drops
+  below them, so nothing hides under the red/yellow/green dots; browser
+  mode is unchanged. (2) A buddy homepage's top-level crumb no longer
+  prints a literal `%ROOT_NAME%` — it names your chief of staff, as
+  intended. (3) The brief card is never dead text: when a buddy's
+  registry `brief` holds a file path or URL instead of prose (a natural
+  slip — the field is prose), the homepage renders a **"Read the brief"**
+  link to the file and the dashboard panel links likewise, instead of
+  printing a path nobody can open; `BRIEF.md` also joins the homepage's
+  file list, first.
+- **Setup & guides (improvements).** SETUP.md opens with a welcome step
+  (introduce yourself, the 30–45 minute shape, what to have ready),
+  gains a step that connects GitHub and creates the user's private copy —
+  including the one real cost, GitHub Pro at $4 a month to publish a
+  private copy's pages, with the free alternatives stated plainly — and
+  finishes by saving the dashboard as a standalone app. START-HERE gains
+  a TL;DR, a plain-words "What's a repo?", and a handoff section that
+  spells the copy-and-paste out exactly.
+- **Conventions (a new habit).** The chief of staff now checks for Buddy
+  OS updates **weekly, on its own initiative** (see `AGENTS.md`), and
+  tells the owner what's new before applying anything. Copies stop
+  waiting to be told.
+
+**Kind:** Machinery + Conventions — no schema migration.
+
+**Adopting:** the standard UPDATE.md flow. Copies on 1.0.0 read the
+v1.1.0 section below as well, in order.
+
 ## v1.1.0 — the one-ask update path (2026-11-21)
 
 **What it is:** updates become a conversation. `instance.json` gains a

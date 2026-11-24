@@ -30,6 +30,11 @@ proves itself, write it down here so the next session starts knowing it.
   so it persists until handled.
 - **Finished work doesn't linger.** Work that is done but unshipped or
   awaiting the owner gets resurfaced within a few days, not silently shelved.
+- **Check for starter updates weekly.** Once a week, unprompted, the chief
+  of staff runs the check in `UPDATE.md` against the starter's latest
+  release. If a newer release exists, summarize what changed in plain
+  terms and apply it on the owner's go (a Schema change always needs the
+  go). Staying current is the staff's job, not the owner's memory.
 
 ## Buddy conventions
 
