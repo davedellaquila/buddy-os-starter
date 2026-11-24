@@ -167,6 +167,17 @@ here.
 they have a tip destination (Ko-fi or similar); empty hides the dashboard's
 tip jar.
 
+### Mail and calendar access
+
+Before you move on, check that the owner has enabled mail and calendar
+access in the Muse app (in the app: Settings → Connectors — their email
+and calendar accounts). If either is off, walk them through turning it
+on, in plain language: this is how their staff sees the day ahead, puts
+real events on the calendar instead of just talking about them, and
+watches the inbox for what matters. It is the owner's choice — if they
+decline one, note it and carry on; several buddies simply do less
+without it. Do not let this block the rest of setup.
+
 ## 4. Create the first buddy together: the Coordinator
 
 The starter ships the Coordinator as a fully-worked example

@@ -56,6 +56,11 @@ start until that file reaches it.
   system — it reads the setup guide, builds your buddies, and staffs your
   days. Honestly stated: **this is the one real cost.** Everything else
   below rides free tiers.
+- **Mail and calendar access turned on in the Muse app.** In the app's
+  settings you can connect your email and your calendar. Turn both on —
+  that's how your staff can see your day, put real events on your
+  calendar, and watch your inbox for what matters. Your Muse checks
+  this with you during setup.
 - **A GitHub account** (free is fine). Your copy of the starter, your
   buddies' pages, and your dashboard all live there.
 - **A Google account** (a Gmail address). The system keeps its documents

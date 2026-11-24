@@ -1,5 +1,12 @@
 # Changelog — Buddy OS Starter
 
+## Unreleased
+
+- Setup now covers mail and calendar access in the Muse app:
+  START-HERE lists it under "Must have before starting," and SETUP's
+  configuration step has the Muse check both are enabled and walk the
+  owner through turning them on (their choice; never a setup blocker).
+
 ## 1.1.0 — 2026-11-21
 
 - The one-ask update path: `instance.json` gains a `starter_version`
