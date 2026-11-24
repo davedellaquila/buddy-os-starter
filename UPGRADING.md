@@ -18,6 +18,19 @@ Change kinds:
 
 ---
 
+## Unreleased — the next release
+
+- **Every buddy gets its own chat (Conventions + setup flow).** Setup now
+  creates a dedicated chat for each buddy — named with its emoji and
+  name, the buddy's introduction posted in it — and the shipped
+  AGENTS.md carries it as a standing convention for buddies created
+  later. **Catch-up for existing installs, check-first:** for each buddy
+  in the registry, look for an existing chat named with the buddy's
+  emoji and name; create only the ones that are missing, and post the
+  buddy's introduction in each chat you create. Never create a duplicate
+  chat for a buddy that already has one — some owners will have made
+  the chats themselves before this release arrives.
+
 ## v1.2.0 — first-tester fixes, and staffs that check for themselves (2026-11-24)
 
 **What it is:** everything learned from the first real tester run, plus a

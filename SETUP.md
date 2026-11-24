@@ -231,10 +231,14 @@ extra: each buddy lives in a dedicated chat of its own, and that chat is
 where its ongoing work happens — the main chat stays the owner's front
 desk. For every installed buddy, the Coordinator included:
 
-1. Create a new chat for the buddy and name it with the buddy's emoji and
-   name (e.g. "🧭 Coordinator").
-2. Post the buddy's introduction as that chat's first message: who it is,
-   the job from its brief in its own words, and a link to its homepage.
+1. Check whether a chat named with the buddy's emoji and name already
+   exists. If it does, use it — never create a duplicate. If not, create
+   a new chat for the buddy and name it with the buddy's emoji and name
+   (e.g. "🧭 Coordinator").
+2. In a chat you just created, post the buddy's introduction as its first
+   message: who it is, the job from its brief in its own words, and a
+   link to its homepage. (A chat that already exists and already has its
+   introduction needs nothing.)
 3. Tell the owner the chats exist and what they're for: day-to-day
    direction still starts here, with you; each buddy's own work,
    questions, and reports collect in its chat.

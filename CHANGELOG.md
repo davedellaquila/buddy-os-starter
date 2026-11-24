@@ -7,7 +7,8 @@
   name, the buddy's introduction posted in it), AGENTS.md carries it as a
   standing convention for buddies created later, and START-HERE shows
   owners where their buddies live. Existing installs: ask your Muse to
-  create the chats for the buddies you already have.
+  check each buddy for its chat and create only the missing ones —
+  never duplicates.
 - Setup now covers mail and calendar access in the Muse app:
   START-HERE lists it under "Must have before starting," and SETUP's
   configuration step has the Muse check both are enabled and walk the
