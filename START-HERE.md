@@ -70,9 +70,11 @@ they'd need and don't:
 
 ## The handoff: give SETUP.md to your Muse
 
-Everything after this point, your Muse does with you. But there is one
-small mechanical step only you can do: **handing your Muse the setup
-file.** The file is called [SETUP.md](https://github.com/davedellaquila/buddy-os-starter/blob/main/SETUP.md),
+**The goal of this step: get the contents of the setup file into your
+Muse.** Once your Muse has them, it takes over — everything after
+this point, your Muse does with you. There is just one small
+mechanical step only you can do first: handing the file over. The
+file is called [SETUP.md](https://github.com/davedellaquila/buddy-os-starter/blob/main/SETUP.md),
 and it lives in this starter's
 GitHub repository, right next to this guide. Here is exactly how, on a
 phone, tablet, or computer:
