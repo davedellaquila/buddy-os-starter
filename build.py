@@ -1496,6 +1496,14 @@ textarea[disabled]{opacity:.5;cursor:not-allowed}
    (#rail-expand), and Recents (#recents-btn) anchors top-left. */
 body:not(.bp-collapsed):has(#view-buddy.active) #panel-open,
 body.standalone #panel-open{display:none}
+/* Standalone window controls (2026-11-24, from Nan's first run): in the
+   standalone app the window manager's stoplight controls float over the
+   top-left corner of the page — exactly where the canvas bar's crumb
+   starts and where #menu-btn sits (top:12px;left:12px). In standalone
+   mode only, give the bar left clearance and drop the menu button
+   below the controls. Browser mode is untouched. */
+body.standalone #canvas-bar{padding-left:88px}
+body.standalone #menu-btn{top:52px}
 /* Owner 2026-10-28: the standalone Recents floater is retired — Recents
    lives in the buddy panel now (#sb-recents in the header tools, right of
    the gear since Owner's 2026-10-28 swap; #rail-recents in the collapsed

@@ -424,7 +424,10 @@ def family_nav(buddies, b):
         parts.append('<nav data-buddy-crumb style="margin-bottom:14px;font-size:14px;">%s</nav>' % links)
     elif bid != 'astro':
         parts.append('<nav data-buddy-crumb style="margin-bottom:14px;font-size:14px;">'
-                     '<a href="%s%%ROOT_ID%%/" style="color:var(--muted);text-decoration:none;">← %%ROOT_NAME%%</a></nav>' % BASE_URL)
+                     '<a href="%s%s/" style="color:var(--muted);text-decoration:none;">← %s</a></nav>'
+                     % (BASE_URL,
+                        ROOT_ORDER_CFG[0] if ROOT_ORDER_CFG else "coordinator-buddy",
+                        esc(ROOT_NAME)))
     kids = sorted(
         (x for x in buddies.values() if bid in eff_parents(buddies, x)),
         key=lambda x: x.get('name', ''))

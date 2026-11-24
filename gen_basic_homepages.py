@@ -114,10 +114,15 @@ def family_nav(b):
             for p in parents)
         parts.append('<nav data-buddy-crumb style="%s">%s</nav>' % (CRUMB_STYLE, links))
     elif bid != 'astro':
-        # Top-level buddies link to the root buddy
+        # Top-level buddies link to the root buddy. Interpolate the values
+        # directly: %%ROOT_NAME%% here would be collapsed by the % operator
+        # to a literal %ROOT_NAME% that apply_instance can no longer match
+        # (it looks for the double-percent form) — the crumb shipped broken.
         parts.append('<nav data-buddy-crumb style="%s">'
-                     '<a href="%s%%ROOT_ID%%/" style="color:inherit;opacity:.65;text-decoration:none;">← %%ROOT_NAME%%</a>'
-                     '</nav>' % (CRUMB_STYLE, BASE_URL))
+                     '<a href="%s%s/" style="color:inherit;opacity:.65;text-decoration:none;">← %s</a>'
+                     '</nav>' % (CRUMB_STYLE, BASE_URL,
+                                 ROOT_ORDER_CFG[0] if ROOT_ORDER_CFG else "coordinator-buddy",
+                                 html.escape(ROOT_NAME)))
     kids = sorted(
         (x for x in d['buddies'] if bid in eff_parents(x)),
         key=lambda x: x.get('name', ''))
