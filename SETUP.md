@@ -50,7 +50,10 @@ a question. Send it before the interview, in your own words, covering:
    their own private copy of the system, shape their first buddy (the
    Coordinator) together, let them pick a few starting buddies, build
    their dashboard, and publish it. One short connecting step at the
-   end, and the system is theirs.
+   end, and the system is theirs. Mention the one cost honestly:
+   GitHub Pro — $4 a month — is what lets a private copy publish its
+   pages; there's a choice to make about that at step 2, and you'll
+   walk them through it there.
 3. **How long it takes.** Roughly 30–45 minutes all in — and they can
    pause at any point and pick up again in this same chat.
 4. **What to have ready.** A GitHub account they can sign in to, and
@@ -71,7 +74,10 @@ Model opening — adapt it, don't recite it:
 > I'll build you a dashboard to see it all. The whole thing takes
 > about half an hour, and we can pause anytime. All you need ready is
 > a GitHub account and a Google account — if you're missing either,
-> we'll make it together first. Shall we start?"
+> we'll make it together first. One honest note: there's exactly one
+> cost in the whole system — GitHub charges $4 a month if you want
+> your copy private *and* its pages published; we'll sort that
+> choice out together when we get there. Shall we start?"
 
 ## 1. Interview (10 minutes, conversational)
 
@@ -108,11 +114,26 @@ the public template. You create the copy for them:
    Create a new repository**: owner = their account; name =
    `buddy-os` (offer that as the default; a different name is fine —
    note it for step 3); visibility = **Private**.
-4. **Verify before moving on:** the new repository exists under their
+4. **Tell them the one cost in the whole system — a key step, don't
+   skip it.** A **private** repository can only publish web pages
+   (their dashboard, step 7) on GitHub's paid plan, **GitHub Pro —
+   $4 a month**. Their choice:
+   - **Upgrade to Pro ($4/month)** — the copy stays private *and* its
+     pages publish. This is the recommended path; privacy is the
+     point of the copy. It's their card and their call — walk them
+     to GitHub's billing page and let them enter payment themselves;
+     never handle their payment details.
+   - **Stay free and make the copy public** — the pages publish, but
+     the repository, and everything that will live in it, is visible
+     to anyone. Say that plainly before they choose it.
+   - **Stay free and private for now** — the system works; the
+     dashboard just isn't on the web until they upgrade.
+   Record their choice — step 7 depends on it.
+5. **Verify before moving on:** the new repository exists under their
    account, it is marked **Private**, and the starter files are in
    it. From here on, every file you create or edit — `instance.json`,
    the registry, the homepages — goes in their copy.
-5. **If you cannot connect** (no connector and no browser access):
+6. **If you cannot connect** (no connector and no browser access):
    say so plainly and steer instead — give them these same clicks one
    at a time (open the template → **Use this template** → name it
    `buddy-os` → **Private** → **Create repository**) and have them
@@ -197,6 +218,10 @@ into your first real buddy."* Leave it open; it closes when they've done it.
 ## 7. Publish with GitHub Pages
 
 In their repo: **Settings → Pages → Deploy from a branch → `main` / root.**
+If their copy is private, Pages needs GitHub Pro — the choice from
+step 2. If they chose free-and-private, skip this step gracefully:
+tell them the dashboard is built but not on the web yet, and leave it
+as an open item, not an error.
 Their dashboard is then at the `pages_url` from step 3. **Verify on the
 served copy** — open the live URL and confirm the dashboard and the
 Coordinator's homepage render there. A local build is a promise; the served

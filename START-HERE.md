@@ -153,7 +153,10 @@ Your Muse follows SETUP.md. In plain terms:
 2. **Your Muse makes your private copy.** This template is public, but
    *your* copy — with your buddies and your life in it — will be
    **private**. Your Muse connects to your GitHub (you sign in on
-   GitHub's own page) and creates the copy for you.
+   GitHub's own page) and creates the copy for you. One cost to know
+   about: a private copy can only publish its web pages on GitHub's
+   Pro plan, **$4 a month** — your Muse will walk you through that
+   choice when you get there.
 3. **You meet your first buddy.** Together you shape the Coordinator, the
    project tracker at the center of the staff.
 4. **You pick your starting staff.** Six more buddies are offered as a
