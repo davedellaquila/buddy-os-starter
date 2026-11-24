@@ -32,6 +32,15 @@ Everything lives in a GitHub repository **you own**. The buddies' pages and
 dashboard are just files in that repo, shown as web pages. Your data is
 yours, in plain text, forever readable.
 
+**What's a repo?** Short for *repository* — think of it as a binder on a
+shelf at GitHub, holding one project. Everything in this system is a file
+in the binder: your dashboard, each buddy's homepage, and a set of
+instruction files that explain to your Muse how Buddy OS works and how
+to run it. The setup file — SETUP.md — is one of several of those
+instruction files: it's the one that tells your Muse how to build your
+system, which is why the handoff further down matters — your Muse can't
+start until that file reaches it.
+
 ## What you need
 
 ### Must have before starting
