@@ -1,5 +1,14 @@
 # SETUP.md — First Run
 
+> **A note for the person holding this file: you don't need to read
+> it.** You can if you're curious — nothing here is secret — but it is
+> written for your Muse, not for you, and it is long and technical by
+> design. Your only job is to get this document over to your Muse:
+> copy and paste its contents into a new chat, or attach the file.
+> Once your Muse has it, it reads the file on its own and takes over
+> from the first step. Your own guide is
+> [START-HERE.md](START-HERE.md).
+
 **This guide is written for the user's Muse.** If you are the Muse who
 just received a fresh copy of this repository: this is your job now. Work
 through it with your user, in order. Skip nothing silently — where a step

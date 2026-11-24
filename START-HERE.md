@@ -88,6 +88,11 @@ and it lives in this starter's
 GitHub repository, right next to this guide. Here is exactly how, on a
 phone, tablet, or computer:
 
+*One heads-up: the SETUP.md links below take you to **GitHub**. The
+page will look different from this guide — plainer, more like a filing
+cabinet than a document. That's expected, and you're in the right
+place.*
+
 **Do this — copy and paste (the easiest way):**
 
 1. **Tap [SETUP.md](https://github.com/davedellaquila/buddy-os-starter/blob/main/SETUP.md)**
