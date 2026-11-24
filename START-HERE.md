@@ -72,14 +72,15 @@ they'd need and don't:
 
 Everything after this point, your Muse does with you. But there is one
 small mechanical step only you can do: **handing your Muse the setup
-file.** The file is called `SETUP.md`, and it lives in this starter's
+file.** The file is called [SETUP.md](https://github.com/davedellaquila/buddy-os-starter/blob/main/SETUP.md),
+and it lives in this starter's
 GitHub repository, right next to this guide. Here is exactly how, on a
 phone, tablet, or computer:
 
 **The easy way — attach the file:**
 
-1. **Open the starter on GitHub** and tap **SETUP.md** in the list of
-   files.
+1. **Tap [SETUP.md](https://github.com/davedellaquila/buddy-os-starter/blob/main/SETUP.md)**
+   to open the setup file on GitHub.
 2. **Download the file.** On the file's page, tap the download button (a
    downward arrow, near the top right of the file). It saves to your
    device — in Files or Downloads.
@@ -92,7 +93,7 @@ phone, tablet, or computer:
 
 **If attaching doesn't cooperate — copy and paste instead:**
 
-1. Open SETUP.md on GitHub and tap **Raw** (top right of the file).
+1. Open [SETUP.md](https://github.com/davedellaquila/buddy-os-starter/blob/main/SETUP.md) on GitHub and tap **Raw** (top right of the file).
 2. Select everything on the page and copy it.
 3. Paste it into a new Muse chat, with the same sentence above it, and
    send.
