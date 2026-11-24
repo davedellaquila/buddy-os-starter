@@ -107,7 +107,7 @@ def esc(s):
     return html.escape(str(s), quote=True)
 
 # --- Markdown from the buddy's own repo (v3.1; live reader since v3.2) -------
-_REPO_ORDER = ['KNOWLEDGE.md', 'CONFIG.md', 'STUDY.md', 'SOUL.md', 'DECISIONS.md',
+_REPO_ORDER = ['BRIEF.md', 'KNOWLEDGE.md', 'CONFIG.md', 'STUDY.md', 'SOUL.md', 'DECISIONS.md',
                'ACCOMPLISHMENTS.md', 'README.md']
 
 def repo_clone_dir(b):
@@ -228,7 +228,7 @@ def repo_markdown_section(b):
 # (tracked files, root + docs/ + files/), always rendered -- "No files yet."
 # when a buddy manages nothing. Keep in step with gen_basic_homepages.py.
 _MF_DOC_EXTS = ('.md', '.txt', '.pdf', '.csv')
-_MF_REPO_ORDER = ['KNOWLEDGE.md', 'CONFIG.md', 'STUDY.md', 'SOUL.md', 'DECISIONS.md',
+_MF_REPO_ORDER = ['BRIEF.md', 'KNOWLEDGE.md', 'CONFIG.md', 'STUDY.md', 'SOUL.md', 'DECISIONS.md',
                   'ACCOMPLISHMENTS.md', 'README.md']
 _MF_TRACKED = {}
 
@@ -511,7 +511,16 @@ def build_page(buddies, plans, b, about=False):
     if b.get('mission'):
         about += '<p class="mission">%s</p>' % esc(b['mission'])
     if b.get('brief'):
-        about += '<p class="brief">%s</p>' % esc(b['brief'])
+        _bv = str(b['brief']).strip()
+        if re.match(r'^(https?://|\S+\.md$)', _bv):
+            # The brief was recorded as a file path or URL (a creating Muse
+            # often writes the BRIEF.md path here). Link it — never print a
+            # path as dead text the reader can't open.
+            _href = _bv if _bv.startswith('http') else \
+                'https://github.com/%s/%s/blob/main/%s' % (GH_OWNER, SYS_REPO, _bv.lstrip('/'))
+            about += '<p class="brief">📄 <a href="%s" target="_blank" rel="noopener">Read the brief</a> <span class="muted">(%s)</span></p>' % (esc(_href), esc(_bv))
+        else:
+            about += '<p class="brief">%s</p>' % esc(_bv)
     if b.get('persona'):
         about += '<p class="persona">🎭 Persona: %s</p>' % esc(b['persona'])
     if b.get('voice'):

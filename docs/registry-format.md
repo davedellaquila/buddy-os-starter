@@ -11,7 +11,7 @@ dashboard and generators understand:
 | `kind` | Loose family grouping (`system`, `personal`, `work`, …) — drives tree colors. |
 | `type` | `project`, `buddy`, or `people-group`. Projects get the project view. |
 | `parent` | Another buddy's id, or `null` for a root. The Coordinator is the default root. |
-| `brief` | One or two sentences: what this buddy is for. |
+| `brief` | One or two sentences: what this buddy is for. Prose, not a file path — the brief *file* is `<id>/BRIEF.md`, and it renders on the buddy's homepage. (If a path or URL lands here anyway, the homepage and dashboard link it instead of printing it as dead text.) |
 | `homepage` | Path of its homepage inside this repo (`reading-buddy/`). |
 | `repo` | Its own GitHub repo name (bare name or full URL; the write paths normalize both). |
 | `status` | Free-form short status (`active`, `brief`, `building`, …). |

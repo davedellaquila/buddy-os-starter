@@ -8099,7 +8099,13 @@ function renderBuddy(id){
   const items = (b.attention || []).filter(a => !attnSeen(b.id, a));
   let arts = '';
   let artCount = 0;
-  if (b.brief) { arts += artRow(ICON_DOC, 'Mission statement', 'The canonical mission & intent — Google Doc', b.brief); artCount++; }
+  if (b.brief) {
+    const _bv = String(b.brief).trim();
+    if (/^https?:\/\//i.test(_bv)) { arts += artRow(ICON_DOC, 'Mission statement', 'The canonical mission & intent', _bv); artCount++; }
+    else if (/\.md$/i.test(_bv)) { arts += artRow(ICON_DOC, 'Brief', 'The buddy's brief file — opens on GitHub', 'https://github.com/%%GH_OWNER%%/%%SYS_REPO%%/blob/main/' + _bv.replace(/^\//, '')); artCount++; }
+    /* A prose brief is not a link: no artifact row (the old code used the
+       prose itself as the href, which went nowhere). */
+  }
   if (b.homepageSource) { arts += artRow(ICON_LINK, 'Homepage', 'Buddy homepage — opens on Muse', b.homepageSource); artCount++; }
   if (b.repo) { arts += artRow(ICON_REPO, 'GitHub Repo', '%%GH_OWNER%%/'+b.repo+' (private)', 'https://github.com/%%GH_OWNER%%/'+b.repo); artCount++; }
   (b.docs || []).forEach(d => { arts += artRow(ICON_LINK, d.label, 'Related document — Google Doc', d.url); artCount++; });
