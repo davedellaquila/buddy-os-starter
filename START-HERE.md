@@ -135,8 +135,10 @@ up"* — your Muse fetches the file itself:
    my Buddy OS. Please follow it step by step and set me up."*
 
 **How you know it worked:** your Muse will introduce itself as your
-chief of staff and start with a short interview — your name, what to
-call you, what you'd like help with. If it only *summarizes* the file
+chief of staff, give you a quick overview of what's about to happen
+and roughly how long it takes, then start with a short interview —
+your name, what to call you, what you'd like help with. If it only
+*summarizes* the file
 instead, say: **"Please follow it, don't summarize it."**
 
 You only do this once, from the starter. After setup, your Muse works
