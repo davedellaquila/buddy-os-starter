@@ -150,9 +150,10 @@ Your Muse follows SETUP.md. In plain terms:
 
 1. **A short interview.** Your Muse asks what you'd like help with, what
    to call you, and a few preferences. Two minutes, conversational.
-2. **You make a private copy.** This template is public, but *your* copy —
-   with your buddies and your life in it — should be **private**. Your
-   Muse will steer you to create it that way.
+2. **Your Muse makes your private copy.** This template is public, but
+   *your* copy — with your buddies and your life in it — will be
+   **private**. Your Muse connects to your GitHub (you sign in on
+   GitHub's own page) and creates the copy for you.
 3. **You meet your first buddy.** Together you shape the Coordinator, the
    project tracker at the center of the staff.
 4. **You pick your starting staff.** Six more buddies are offered as a

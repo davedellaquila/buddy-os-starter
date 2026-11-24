@@ -31,7 +31,7 @@ questions consistent with what it promises.
   it is who is holding this guide.
 - **The Coordinator is a buddy inside the system** — a project-tracking
   buddy (it tracks projects, open items, and the buddy tree), one level
-  down from you. Setup creates it *with* the user in step 3. Never describe
+  down from you. Setup creates it *with* the user in step 4. Never describe
   the Coordinator as the user's chief of staff or as their interface;
   it is staff, not the front door.
 
@@ -89,7 +89,37 @@ Learn, in this order:
 Defaults rule: persona, voice, and icon choices never block setup. Pick
 sensible defaults; they can change everything later.
 
-## 2. Configure the instance
+## 2. Connect GitHub and create their private copy
+
+Everything from here happens in **their** copy of this repo — never in
+the public template. You create the copy for them:
+
+1. **Before you connect anything, tell them what's about to happen:**
+   you're going to connect to *their* GitHub account so you can
+   create the copy in it. They will sign in on GitHub's own page —
+   you never see, handle, or store their password, and they must
+   never paste a password or a token into this chat.
+2. **Connect.** Use the GitHub access available to you — a GitHub
+   connector if one is offered, or their signed-in browser if you're
+   operating it. Walk them through the sign-in and authorize screens
+   in plain words, one screen at a time.
+3. **Create the copy.** From the template —
+   `davedellaquila/buddy-os-starter` — use **Use this template →
+   Create a new repository**: owner = their account; name =
+   `buddy-os` (offer that as the default; a different name is fine —
+   note it for step 3); visibility = **Private**.
+4. **Verify before moving on:** the new repository exists under their
+   account, it is marked **Private**, and the starter files are in
+   it. From here on, every file you create or edit — `instance.json`,
+   the registry, the homepages — goes in their copy.
+5. **If you cannot connect** (no connector and no browser access):
+   say so plainly and steer instead — give them these same clicks one
+   at a time (open the template → **Use this template** → name it
+   `buddy-os` → **Private** → **Create repository**) and have them
+   confirm each screen. The copy still ends up private and theirs;
+   only the hands differ.
+
+## 3. Configure the instance
 
 Create `instance.json` beside `build.py` (start from `instance.example.json`):
 
@@ -116,7 +146,7 @@ here.
 they have a tip destination (Ko-fi or similar); empty hides the dashboard's
 tip jar.
 
-## 3. Create the first buddy together: the Coordinator
+## 4. Create the first buddy together: the Coordinator
 
 The starter ships the Coordinator as a fully-worked example
 (`samples/coordinator-buddy/` — brief, config, knowledge). Walk it with your
@@ -131,16 +161,16 @@ user and make it *theirs*:
    (`parent: null`, `homepage: "coordinator-buddy/"`). The registry format
    is documented in `docs/registry-format.md`.
 
-## 4. The pick-list: choose the starting staff
+## 5. The pick-list: choose the starting staff
 
-Your Coordinator already exists (step 3) — it is the anchor: pre-selected,
+Your Coordinator already exists (step 4) — it is the anchor: pre-selected,
 recommended, their first buddy. Now present the other six starter buddies
 as a **pick-list**, using each brief card as the pitch
 (`samples/*/BRIEF.md`): Reading 📚, Fitness 🏃, Budget 🧾, Home 🏠,
 Travel 🧳, Learning 🌱. One question per card: *install this one now?*
 
 - **Picked:** spend two minutes making the brief theirs; the buddy is
-  wired into the registry in step 5 and gets its homepage.
+  wired into the registry in step 6 and gets its homepage.
 - **Not picked:** the buddy is simply not installed yet. **Do not delete
   anything** — its brief card stays in `samples/` in their copy, and they
   can install it any later day by asking you. Prune only its registry
@@ -151,7 +181,7 @@ Travel 🧳, Learning 🌱. One question per card: *install this one now?*
   create entirely new buddies of their own at any time — the seven are
   a menu, not the whole kitchen.
 
-## 5. Generate homepages and build the dashboard
+## 6. Generate homepages and build the dashboard
 
 ```bash
 python3 gen_basic_homepages.py            # every buddy's homepage
@@ -159,20 +189,20 @@ python3 gen_default_homepages.py --about coordinator-buddy reading-buddy fitness
 python3 build.py                          # the dashboard: index.html
 ```
 
-(Adjust the `--about` list to the buddies they picked in step 4 — generation follows the registry, which now holds exactly their picks plus the Coordinator.) Then open the
+(Adjust the `--about` list to the buddies they picked in step 5 — generation follows the registry, which now holds exactly their picks plus the Coordinator.) Then open the
 dashboard locally and walk it together: the tree, the Coordinator's panel,
 its attention item — which is real: *"Finish setup and turn one brief card
 into your first real buddy."* Leave it open; it closes when they've done it.
 
-## 6. Publish with GitHub Pages
+## 7. Publish with GitHub Pages
 
 In their repo: **Settings → Pages → Deploy from a branch → `main` / root.**
-Their dashboard is then at the `pages_url` from step 2. **Verify on the
+Their dashboard is then at the `pages_url` from step 3. **Verify on the
 served copy** — open the live URL and confirm the dashboard and the
 Coordinator's homepage render there. A local build is a promise; the served
 copy is the fact.
 
-## 7. The token step (token-gated writes)
+## 8. The token step (token-gated writes)
 
 The dashboard and homepages write back to GitHub (attention dispositions,
 brain dumps, notes) using a token the user pastes **once, into the page's
@@ -198,7 +228,7 @@ page). Then prove it works: disposition the Coordinator's sample attention
 item as **Later** from its homepage, and show them the stamp it wrote into
 `buddies.json`. Undo it together.
 
-## 8. Day two
+## 9. Day two
 
 - Rename a sample buddy into something truly theirs, or create a brand-new
   one: brief first (use the Coordinator's brief as the pattern), registry
