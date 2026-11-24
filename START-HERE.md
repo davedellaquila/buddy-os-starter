@@ -168,7 +168,9 @@ Your Muse follows SETUP.md. In plain terms:
    buddies whenever you like. The menu is a starting set, not a ceiling.
 5. **Pages appear.** Your Muse generates your dashboard and each buddy's
    homepage, and walks you through turning on GitHub Pages so you can see
-   them in a browser.
+   them in a browser. Then, in Safari, you'll save the dashboard to your
+   home screen (or your Dock, on a Mac) — from then on it opens like an
+   app, not a web page.
 6. **One careful step: the token** (next section). Then you're running.
 
 ## The token step, in plain language

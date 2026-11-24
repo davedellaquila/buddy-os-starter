@@ -227,6 +227,22 @@ served copy** — open the live URL and confirm the dashboard and the
 Coordinator's homepage render there. A local build is a promise; the served
 copy is the fact.
 
+**Finish by putting the dashboard on their home screen.** Once the
+served copy verifies, walk them through saving the dashboard as a
+standalone app — this is how they'll open it every day:
+
+- **iPhone or iPad:** open the dashboard URL in **Safari** → tap the
+  **Share** button (the square with an arrow pointing up) → scroll
+  down and tap **Add to Home Screen** → keep the suggested name (or
+  use their system name) → **Add**. The dashboard now sits on their
+  home screen and opens full-screen, like an app — no browser bars.
+- **Mac:** open the dashboard URL in **Safari** → **File → Add to
+  Dock…** → name it → **Add**. It opens from the Dock in its own
+  window, like an app.
+
+Have them open it from the new icon once, so the finished system's
+first launch is from the app — not from a browser tab they'll lose.
+
 ## 8. The token step (token-gated writes)
 
 The dashboard and homepages write back to GitHub (attention dispositions,
