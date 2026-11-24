@@ -1,10 +1,12 @@
 # Start here 👋
 
-**TL;DR — copy the contents of [SETUP.md](https://github.com/davedellaquila/buddy-os-starter/blob/main/SETUP.md)
-into your Muse.** Select all of the file, copy it, paste it into a new
-chat with your Muse, and send. That one step starts everything — your
-Muse reads it and does the rest with you. (The step-by-step, plus a
-download-and-attach alternative, is in "The handoff" section below.)
+**TL;DR — paste the link to the setup file into your Muse.** Copy
+this address, paste it into a new chat with your Muse, and send:
+`https://raw.githubusercontent.com/davedellaquila/buddy-os-starter/main/SETUP.md`
+Your Muse opens it, reads it, and does the rest with you — that one
+step starts everything. (If your Muse can't open links, copy and
+paste the file's contents instead. Both ways are spelled out in "The
+handoff" section below.)
 
 *This guide is for you, the person. The other guide — [SETUP.md](SETUP.md) —
 is written for your Muse, who will do the building. You don't need to
@@ -94,12 +96,25 @@ and it lives in this starter's
 GitHub repository, right next to this guide. Here is exactly how, on a
 phone, tablet, or computer:
 
-*One heads-up: the SETUP.md links below take you to **GitHub**. The
-page will look different from this guide — plainer, more like a filing
-cabinet than a document. That's expected, and you're in the right
-place.*
+**Way one — paste the link (the easiest way):**
 
-**Do this — copy and paste (the easiest way):**
+1. **Copy this address** — it's the setup file as plain text:
+   `https://raw.githubusercontent.com/davedellaquila/buddy-os-starter/main/SETUP.md`
+2. **Open your Muse** — the Muse app, or muse.ai in your browser —
+   and start a **new chat**.
+3. **Type this sentence, paste the address under it, and send:**
+   *"This is the setup file for my Buddy OS. Please open it, follow
+   it step by step, and set me up."*
+
+You don't even have to open the file yourself for this way — your
+Muse fetches it. If your Muse says it can't open links, use way two.
+
+*One heads-up for ways two and three: their SETUP.md links take you to
+**GitHub**. The page will look different from this guide — plainer,
+more like a filing cabinet than a document. That's expected, and
+you're in the right place.*
+
+**Way two — copy and paste the contents (if your Muse can't open links):**
 
 1. **Tap [SETUP.md](https://github.com/davedellaquila/buddy-os-starter/blob/main/SETUP.md)**
    to open the setup file on GitHub.
@@ -114,7 +129,7 @@ place.*
    send:** *"This is the setup file for my Buddy OS. Please follow it
    step by step and set me up."*
 
-**The other way — download the file and attach it:**
+**Way three — download the file and attach it:**
 
 1. **Tap [SETUP.md](https://github.com/davedellaquila/buddy-os-starter/blob/main/SETUP.md)**
    to open the setup file on GitHub.
