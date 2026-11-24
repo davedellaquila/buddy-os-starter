@@ -24,6 +24,7 @@ never drift apart.)
 2. **Open SETUP.md with your Muse.** The setup guide is written for your
    Muse, not for you: your Muse interviews you, creates your first buddy
    with you, wires the registry, and builds your first homepage.
+   (START-HERE.md has the exact hand-it-over steps.)
 3. **Meet the staff.** Seven starter buddies ship as brief cards in
    `samples/` — a Coordinator (fully worked example) plus Reading, Fitness,
    Budget, Home, Travel, and Learning buddies. Setup presents them as a

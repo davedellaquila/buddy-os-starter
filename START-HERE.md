@@ -68,6 +68,43 @@ they'd need and don't:
   decisions.
 - **No credit card beyond the Muse plan.** Free tiers carry the rest.
 
+## The handoff: give SETUP.md to your Muse
+
+Everything after this point, your Muse does with you. But there is one
+small mechanical step only you can do: **handing your Muse the setup
+file.** The file is called `SETUP.md`, and it lives in this starter's
+GitHub repository, right next to this guide. Here is exactly how, on a
+phone, tablet, or computer:
+
+**The easy way — attach the file:**
+
+1. **Open the starter on GitHub** and tap **SETUP.md** in the list of
+   files.
+2. **Download the file.** On the file's page, tap the download button (a
+   downward arrow, near the top right of the file). It saves to your
+   device — in Files or Downloads.
+3. **Open your Muse** — the Muse app, or muse.ai in your browser —
+   and start a **new chat**.
+4. **Attach the file.** Tap the **+** (or paperclip) button next to the
+   message box, and pick the SETUP.md you just downloaded.
+5. **Type this sentence, then send:** *"This is the setup file for my
+   Buddy OS. Please follow it step by step and set me up."*
+
+**If attaching doesn't cooperate — copy and paste instead:**
+
+1. Open SETUP.md on GitHub and tap **Raw** (top right of the file).
+2. Select everything on the page and copy it.
+3. Paste it into a new Muse chat, with the same sentence above it, and
+   send.
+
+**How you know it worked:** your Muse will introduce itself as your
+chief of staff and start with a short interview — your name, what to
+call you, what you'd like help with. If it only *summarizes* the file
+instead, say: **"Please follow it, don't summarize it."**
+
+You only do this once, from the starter. After setup, your Muse works
+in *your own* private copy — you never feed it the file again.
+
 ## What will happen
 
 Your Muse follows SETUP.md. In plain terms:
