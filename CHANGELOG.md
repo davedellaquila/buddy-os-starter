@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- Every buddy now gets its own chat during setup. SETUP's build step
+  creates a dedicated chat per installed buddy (named with its emoji and
+  name, the buddy's introduction posted in it), AGENTS.md carries it as a
+  standing convention for buddies created later, and START-HERE shows
+  owners where their buddies live. Existing installs: ask your Muse to
+  create the chats for the buddies you already have.
 - Setup now covers mail and calendar access in the Muse app:
   START-HERE lists it under "Must have before starting," and SETUP's
   configuration step has the Muse check both are enabled and walk the

@@ -41,6 +41,9 @@ proves itself, write it down here so the next session starts knowing it.
 - A buddy for a person is named `<Name>'s Buddy`.
 - A new buddy's first task is its own homepage (rubric:
   `docs/homepage-audition.md`).
+- Every buddy gets its own chat at creation, named with its emoji and
+  name, with the buddy's introduction posted in it. A buddy's ongoing
+  work lives in its chat; a buddy without a chat is only half installed.
 - Persona and voice get sensible defaults at creation; the owner can change
   them any time. Never block creation on taste decisions.
 - Buddies are private by default; public is an explicit per-buddy choice.

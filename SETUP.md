@@ -226,6 +226,24 @@ dashboard locally and walk it together: the tree, the Coordinator's panel,
 its attention item — which is real: *"Finish setup and turn one brief card
 into your first real buddy."* Leave it open; it closes when they've done it.
 
+**Then give every buddy its own chat.** This is part of the design, not an
+extra: each buddy lives in a dedicated chat of its own, and that chat is
+where its ongoing work happens — the main chat stays the owner's front
+desk. For every installed buddy, the Coordinator included:
+
+1. Create a new chat for the buddy and name it with the buddy's emoji and
+   name (e.g. "🧭 Coordinator").
+2. Post the buddy's introduction as that chat's first message: who it is,
+   the job from its brief in its own words, and a link to its homepage.
+3. Tell the owner the chats exist and what they're for: day-to-day
+   direction still starts here, with you; each buddy's own work,
+   questions, and reports collect in its chat.
+
+Every buddy created later gets its chat at creation, the same way
+(step 9). If creating chats isn't available in the owner's app surface,
+say so plainly and leave it as an open item on the Coordinator's page —
+never silently skip it.
+
 ## 7. Publish with GitHub Pages
 
 In their repo: **Settings → Pages → Deploy from a branch → `main` / root.**
@@ -284,7 +302,9 @@ item as **Later** from its homepage, and show them the stamp it wrote into
 
 - Rename a sample buddy into something truly theirs, or create a brand-new
   one: brief first (use the Coordinator's brief as the pattern), registry
-  entry, homepage. First task is always the homepage.
+  entry, homepage. First task is always the homepage — and create the
+  buddy's own chat at creation (emoji + name, its introduction posted in
+  it). A buddy without a chat is only half installed.
 - Read `AGENTS.md` together and edit one line so it's theirs.
 - Set a standing rhythm: a morning glance at the dashboard's open items.
 - Updates are the staff's job: once a week, unprompted, check for Buddy OS

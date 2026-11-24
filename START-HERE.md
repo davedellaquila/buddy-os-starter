@@ -202,12 +202,16 @@ simply save on that device only, and the page will tell you so honestly.
 
 ## Check the results with your own eyes
 
-When setup finishes, your Muse will give you two links. Open them:
+When setup finishes, your Muse will give you two links. Open them — and
+take a look at your buddies' chats, too:
 
 - **Your dashboard** — your whole staff on one page: every buddy, what's
   waiting on you, what changed. This is the page you'll live in.
 - **Your Coordinator's homepage** — one buddy's page: its brief, its open
   items, its files. Every buddy's page looks like this.
+- **Your buddies' chats** — every buddy has its own chat, named with its
+  emoji and name. That's where each buddy's work lives; your main chat
+  stays your front desk.
 
 Click a task on the Coordinator's page and mark it done. That's the whole
 system in one gesture: a page that's also a tool.
