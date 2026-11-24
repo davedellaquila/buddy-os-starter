@@ -1,5 +1,11 @@
 # Start here 👋
 
+**TL;DR — copy the contents of [SETUP.md](https://github.com/davedellaquila/buddy-os-starter/blob/main/SETUP.md)
+into your Muse.** Select all of the file, copy it, paste it into a new
+chat with your Muse, and send. That one step starts everything — your
+Muse reads it and does the rest with you. (The step-by-step, plus a
+download-and-attach alternative, is in "The handoff" section below.)
+
 *This guide is for you, the person. The other guide — [SETUP.md](SETUP.md) —
 is written for your Muse, who will do the building. You don't need to
 read that one; this one tells you what will happen and what to expect.*
